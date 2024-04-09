@@ -1,0 +1,58 @@
+@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix s: <http://w3id.org/explainability/sense#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <https://www.w3.org/ns/ssn/> .
+
+s: a owl:Ontology ;
+        owl:imports sosa: ,
+            ssn: ;
+        dc:contributor "Thomas Frühwirth" ,
+            "Mohammad Bilal" ,
+            "Ioan Toma" ,
+            "Simon Steyskal" ,
+            "Gernot Steindl" ,
+            "Marta Sabou" ;
+        dc:created "2023-11-01" ;
+        dc:creator "Katrin Schreiberhuber" ,
+            "Fajar J. Ekaputra" ;
+        dc:description "An ontology to create an explainable Cyber Physical System (CPS)"@en ;
+        dc:license <https://creativecommons.org/licenses/by/4.0> ;
+        dc:modified "2024-04-02" ;
+        dc:title "SENSE Ontology"@en ;
+        <http://purl.org/vocab/vann/preferredNamespacePrefix> "s" ;
+        <http://purl.org/vocab/vann/preferredNamespaceUri> "http://w3id.org/explainability/sense#" .
+
+s:Event rdfs:comment "something happening in the system, which is of interest. An event is always considered to be happening at a single time point." .
+s:EventDetection rdfs:comment "A procedure to detect an event in the system." .
+s:EventToStateConversion rdfs:comment "A Procedure that is used to convert an event or set of events to a state or set of states." .
+s:EventType rdfs:comment "A type of event. Each event has an event type." .
+s:SensorType rdfs:comment "A type of a sensor. Each sensor as a sensor type." .
+s:State rdfs:comment "A state of a sensor. A state is a condition of a sensor over a period of time. A state is started and ended by an event." .
+s:StateType rdfs:comment  "A type of a state. Each state has a state type." .
+s:StateTypeCausality rdfs:comment "A type causality relation between two state types." .
+s:algorithm rdfs:comment "A reference to an algorithm, which implements a procedure" .
+s:associatedSensorType rdfs:comment "relation between a state type and the sensor type, where such a state type can occur." .
+s:causalRelation rdfs:comment "A type of causal relation, which can be one of three options: causes, prevents, enables" .
+s:causallyRelated rdfs:comment "A causal relation between two state instances." .
+s:cause rdfs:comment "Relation between a state type causality and the state type that is the cause of the relation." .
+s:causes rdfs:comment "A type of causal relation. If eventA occurs, eventB most probably occurs as a result." .
+s:effect rdfs:comment "Relation between a state type causality and the state type that is the effect of the relation." .
+s:enables rdfs:comment "A type of causal relation. If eventA does not occur, eventB most probably does not occur (not enabled to occur)" .
+s:hasCausalRelation rdfs:comment "relation between a state type causality and the type of causality described." .
+s:hasEndEvent rdfs:comment "relation between a state and the event that is ending the state." .
+s:hasEndEventType rdfs:comment "Relation between a state type and an event type. Describes which event type ends a certain state type." .
+s:hasEventType rdfs:comment "relation between an event and its event type." .
+s:hasSensorType rdfs:comment "relation between a sensor and its sensor type." .
+s:hasStartEvent rdfs:comment "relation between a state and the event that is starting the state." .
+s:hasStartEventType rdfs:comment "Relation between a state type and an event type. Describes which event type starts a certain state type." .
+s:hasStateType rdfs:comment "relation between a state and its state type." .
+s:hasTemporalRelation rdfs:comment "relation between a state type causality and the temporal restrictions of the relation." .
+s:hasTopologicalRelation rdfs:comment "relation between a state type causality and the topological restrictions of the relation." .
+s:prevents rdfs:comment "A type of causal relation. If eventA occurs, eventB most probably does not occur as a result." .
+s:temporalRelation rdfs:comment "A type of temporal relation, which can be one of four options: before, overlaps, contains, identity" .
+s:timeSeriesDataRef rdfs:comment "reference to the time series data that is needed for the procedure." .
+s:topologicalRelation rdfs:comment "A type of topological relation, which can be one of three options: samePlatform, siblingPlatform, parentPlatform" .
+

@@ -59,8 +59,8 @@ s:hasCausalRelation a owl:ObjectProperty ;
 
 s:hasEndEvent a owl:ObjectProperty ;
     rdfs:label "has end event" ;
-    rdfs:domain s:Event ;
-    rdfs:range s:State .
+    rdfs:domain s:State ;
+    rdfs:range s:Event .
 
 s:hasEndEventType a owl:ObjectProperty ;
     rdfs:label "has end event type" ;
@@ -79,7 +79,8 @@ s:hasSensorType a owl:ObjectProperty ;
 
 s:hasStartEvent a owl:ObjectProperty ;
     rdfs:label "has start event" ;
-    rdfs:domain s:Event .
+    rdfs:domain s:State ;
+    rdfs:range s:Event .
 
 s:hasStartEventType a owl:ObjectProperty ;
     rdfs:label "has start event type" ;
@@ -164,10 +165,6 @@ s:topologicalRelation a owl:Class ;
 s:SensorType a owl:Class ;
     rdfs:label "Sensor Type" .
 
-s:State a owl:Class ;
-    rdfs:label "State" ;
-    rdfs:subClassOf sosa:Result .
-
 sosa:ObservableProperty a owl:Class ;
     rdfs:label "Observable Property" .
 
@@ -176,6 +173,10 @@ sosa:Platform a owl:Class ;
 
 s:Event a owl:Class ;
     rdfs:label "Event" ;
+    rdfs:subClassOf sosa:Result .
+
+s:State a owl:Class ;
+    rdfs:label "State" ;
     rdfs:subClassOf sosa:Result .
 
 s:causallyRelated a owl:ObjectProperty ;

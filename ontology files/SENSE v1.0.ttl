@@ -21,9 +21,8 @@ s:EventDetection a owl:Class ;
     rdfs:label "Event Detection" ;
     rdfs:subClassOf sosa:Procedure .
 
-s:EventToStateConversion a owl:Class ;
-    rdfs:label "Event To State Conversion" ;
-    rdfs:subClassOf sosa:Procedure .
+s:detectsEventType a owl:DatatypeProperty ;
+    rdfs:label "detects EventType" .
 
 s:algorithm a owl:DatatypeProperty ;
     rdfs:label "algorithm" .

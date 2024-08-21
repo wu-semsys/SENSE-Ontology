@@ -200,6 +200,10 @@ sosa:Sensor a owl:Class ;
 s:StateType a owl:Class ;
     rdfs:label "State Type" .
 
+sosa:ExplanationTriggerState a owl:DatatypeProperty ;
+    rdfs:label "Explanation Triggerstate" ;
+    rdfs:range xsd:boolean .
+
 s:ResultType a owl:Class ;
     rdfs:label "Result Type" .
 

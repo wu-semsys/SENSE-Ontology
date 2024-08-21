@@ -54,7 +54,7 @@ s:enables a owl:ObjectProperty ;
 s:hasCausalRelation a owl:ObjectProperty ;
     rdfs:label "has causal relation" ;
     rdfs:domain s:StateTypeCausality ;
-    rdfs:range s:causalRelation .
+    rdfs:range s:CausalRelation .
 
 s:hasEndEvent a owl:ObjectProperty ;
     rdfs:label "has end event" ;
@@ -94,12 +94,12 @@ s:hasStateType a owl:ObjectProperty ;
 s:hasTemporalRelation a owl:ObjectProperty ;
     rdfs:label "has temporal relation" ;
     rdfs:domain s:StateTypeCausality ;
-    rdfs:range s:temporalRelation .
+    rdfs:range s:TemporalRelation .
 
 s:hasTopologicalRelation a owl:ObjectProperty ;
     rdfs:label "has topological relation" ;
     rdfs:domain s:StateTypeCausality ;
-    rdfs:range s:topologicalRelation .
+    rdfs:range s:TopologicalRelation .
 
 s:prevents a owl:ObjectProperty ;
     rdfs:label "prevents" ;
@@ -152,13 +152,13 @@ ssn:implements a owl:ObjectProperty ;
     rdfs:domain sosa:Sensor ;
     rdfs:range sosa:Procedure .
 
-s:causalRelation a owl:Class ;
+s:CausalRelation a owl:Class ;
     rdfs:label "causal Relation" .
 
-s:temporalRelation a owl:Class ;
+s:TemporalRelation a owl:Class ;
     rdfs:label "temporal Relation" .
 
-s:topologicalRelation a owl:Class ;
+s:TopologicalRelation a owl:Class ;
     rdfs:label "topological Relation" .
 
 s:SensorType a owl:Class ;

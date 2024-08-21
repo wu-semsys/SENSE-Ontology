@@ -127,9 +127,9 @@ sosa:observedProperty a owl:ObjectProperty ;
     rdfs:domain sosa:Observation ;
     rdfs:range sosa:ObservableProperty .
 
-sosa:observes a owl:ObjectProperty ;
+s:observes a owl:ObjectProperty ;
     rdfs:label "observes" ;
-    rdfs:domain sosa:Sensor ;
+    rdfs:domain sosa:SensorType ;
     rdfs:range sosa:ObservableProperty .
 
 sosa:phenomenonTime a owl:DatatypeProperty ;

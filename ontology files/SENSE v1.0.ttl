@@ -29,8 +29,7 @@ s:algorithm a owl:DatatypeProperty ;
 
 s:associatedSensorType a owl:ObjectProperty ;
     rdfs:label "associated sensor type" ;
-    rdfs:domain s:EventType,
-        s:StateType ;
+    rdfs:domain s:ResultType ;
     rdfs:range s:SensorType .
 
 s:cause a owl:ObjectProperty ;
@@ -116,10 +115,7 @@ sosa:hasResult a owl:ObjectProperty ;
     rdfs:range sosa:Result .
 
 sosa:hosts a owl:ObjectProperty ;
-    rdfs:label "hosts" ;
-    rdfs:domain sosa:Platform ;
-    rdfs:range sosa:Platform,
-        sosa:Sensor .
+    rdfs:label "hosts" .
 
 sosa:madeObservation a owl:ObjectProperty ;
     rdfs:label "made observation" ;
@@ -172,11 +168,13 @@ sosa:Platform a owl:Class ;
 
 s:Event a owl:Class ;
     rdfs:label "Event" ;
-    rdfs:subClassOf sosa:Result .
+    rdfs:subClassOf sosa:Result ;
+    owl:disjointWith s:State .
 
 s:State a owl:Class ;
     rdfs:label "State" ;
-    rdfs:subClassOf sosa:Result .
+    rdfs:subClassOf sosa:Result ;
+    owl:disjointWith s:State .
 
 s:causallyRelated a owl:ObjectProperty ;
     rdfs:label "causally related" .
@@ -201,4 +199,7 @@ sosa:Sensor a owl:Class ;
 
 s:StateType a owl:Class ;
     rdfs:label "State Type" .
+
+s:ResultType a owl:Class ;
+    rdfs:label "Result Type" .
 

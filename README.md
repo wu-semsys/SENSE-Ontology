@@ -11,11 +11,74 @@ The SENSE Ontology is created as part of the SENSE project. It is located at the
 
 ## Workflow
 To enforce any changes to the SENSE Ontology, the following steps should be executed:
-1. Export drawio of the Ontology as an XML File ``SENSE v1.0.drawio.xml``
+1. Export drawio of the Ontology as an XML File ``SENSE v1.0.drawio.xml`` and PNG
 2. Convert the XML file to ttl using the chowlk converter
 3. add missing descriptions of classes and properties in the ``SENSEComments.ttl`` file (to check which objects miss a description, execute ``extract_empty_object_definitions.py``)
 4. if needed, update Abstract, Introduction, Description, References below to be added to the widoco page of the ontology. 
-5. [TODO Gregor] add steps to get to Widoco website
+5. Follow these steps to generate and deploy the documentation for the SENSE Ontology:
+
+
+   1. **Clone the SENSE Ontology Repository**
+      - Open a terminal on your local machine.
+      - Clone the SENSE Ontology repository using the following command:
+        ```bash
+        git clone [repository-url]
+        ```
+      - Navigate to the cloned repository:
+        ```bash
+        cd [repository-directory]
+        ```
+
+   2. **Combine SENSE and SENSEComments TTL Files**
+      - Run the `ontology_combiner.py` script to merge the SENSE ontology and SENSEComments files into a single TTL file:
+        ```bash
+        python ontology_combiner.py
+        ```
+      - The output will be a combined TTL file that includes both SENSE and SENSEComments data.
+
+   3. **Download the Latest WIDOCO JAR**
+      - Visit the [WIDOCO releases page](https://github.com/dgarijo/WIDOCO/releases).
+      - Download the latest version of the WIDOCO JAR file.
+
+   4. **Run WIDOCO**
+      - Navigate to the directory where the WIDOCO JAR file was downloaded.
+      - Execute the following command to run WIDOCO:
+        ```bash
+        java -jar widoco-VERSION-jar-with-dependencies.jar
+        ```
+      - Replace `VERSION` with the actual version number of the downloaded WIDOCO JAR.
+
+   5. **Create Template Documentation from the Combined TTL File**
+      - In the WIDOCO interface, select the option "Create template documentation from ontology file."
+      - Upload the combined TTL file generated in Step 2.
+
+   6. **Update Project Information**
+      - Update the **Project Name** and **Export Location** as required in the WIDOCO interface.
+
+   7. **Customize the Metadata**
+      - Customize sections such as title, author, and other metadata to fit the project requirements.
+
+   8. **Select Widoco Sections to be Generated**
+      - Choose the sections you want to include in your documentation. For publication purposes, ensure the **htaccessfile** section is selected.
+
+   9. **Generate the WIDOCO Documentation**
+      - Once all settings are configured, proceed to generate the documentation.
+
+   10. **Update the Generated Page**
+       - Manually update the generated Description, Abstract, Introduction, and References page with information as described below.
+
+   11. **Restructure the Folder for Deployment**
+       - Organize the output folder to match the following structure:
+         ```
+         -> .htaccess
+         -> doc
+            -> (other relevant files)
+         ```
+
+   12. **Zip the Folder and Upload**
+       - Compress the structured folder into a ZIP file.
+       - Upload the ZIP file to the designated server for deployment.
+
 
 ## Abstract
 This ontology is created to support Semantics-based Explanation of Cyber-physical Systems in the course of the SENSE Project.

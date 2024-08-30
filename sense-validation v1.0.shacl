@@ -1,0 +1,44 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sense: <http://w3id.org/explainability/sense#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/>
+
+# Define the shape for the Sensor class
+sense:SensorShape
+    a sh:NodeShape ;                            
+    sh:targetClass sense:Sensor ;                   
+    sh:property [                                
+        sh:path sense:hasSensorType ;                  
+        sh:minCount 1 ;
+		sh:maxCount 1 ;
+		sh:class sense:SensorType
+        sh:message "Each Sensor must have a sensorType." ;  
+    ] 
+.
+
+# Define the shape for the Platform class
+sense:PlatformShape
+	a sh:NodeShape ;
+	sh:targetClass sosa:Platform
+	sh:property [
+		sh:path sosa:hosts ;
+		sh:class sense:Sensor ;
+	]
+.
+
+# Define the shape for the StateType class
+sense:StateTypeShape
+	a sh:NodeShape ;
+	sh:targetClass sense:StateType ;
+	sh:property [
+		sh:path sense:hasStartEventType ;
+		sh:minCount 1 ;
+		sh:class sense:EventType ;
+		sh:message "A State Type must have a start Event Type." ;
+	] ;
+	sh:property [
+		sh:path sense:hasEndEventType ;
+		sh:minCount 1 ;
+		sh:class sense:EventType ;
+		sh:message "A State Type must have a end Event Type." ;
+	] ;
+.

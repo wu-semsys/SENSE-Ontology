@@ -1,0 +1,71 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix s: <http://w3id.org/explainability/sense#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <https://www.w3.org/ns/ssn/> .
+@prefix CoInd4: <http://semanticweb.org/STEaMINg/ContextOntology-COInd4#> 
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#>
+@prefix time: <http://www.w3.org/2006/time#>
+
+# SOSA
+# Platform is a feature of interest in our setup.
+# not sure if we should set them equal, or if all platforms should be defined as FoI separately as well.
+# also, we do not have platform types, different to the sensors.
+
+sosa:Platform a sosa:FeatureOfInterest . # added by me
+
+
+# from CoInd4 Ontology
+# Process module is not really used in SENSE, but could be a good link to PERKS/Manufacturing?
+# Location module is currently ignored by us as we do not care about specific locations
+
+sosa:hosts a owl:ObjectProperty ;
+    rdfs:domain sosa:Platform ;
+    rdfs:range sosa:Sensor .
+
+CoInd4:Resource a owl:Class ;
+    owl:equivalentClass sosa:Platform ;
+    rdfs:subClassOf geosparql:Feature .
+
+CoInd4:hasTime a owl:ObjectProperty ;
+    rdfs:domain sosa:Observation ;
+    rdfs:range time:TemporalEntity ;
+    owl:equivalentProperty sosa:phenomenonTime. # added by me
+
+CoInd4:Situation owl:equivalentClass s:State . # added by me
+
+CoInd4:situationTime a owl:ObjectProperty ;
+    rdfs:domain CoInd4:Situation ;
+    rdfs:domain temporal:ValidTime .
+
+CoInd4:Action owl:equivalentClass s:MitigationAction/s:MitigationPlan . # ??? is similar, but we go in more details
+
+CoInd4:Constraint # is connected to our event detection procedure, but not quite
+
+
+# SAREF core Ontology
+# FoI in SAREF could be more fitting to our Ontology, as it seems like a Plaform.
+
+saref:Device owl:equivalentClass sosa:Sensor . #???
+
+
+# SEM Ontology Simple Event Model
+
+s:Event rdfs:subClassOf sem:Event .
+
+s:State rdfs:subClassOf sem:Event .
+
+# FMECA Ontology
+fmeca:EquipmentComponent owl:equivalentClass sosa:Platform .
+fmeca:isPartOf owl:inverseOf sosa:hosts .
+fmeca:FailureMode owl:equivalentClass s:State .
+fmeca:DetectionMethod owl:equivalentClass s:EventDetection .
+fmeca:CompensatoryMeasure owl:equivalentClass s:MitigationAction .
+fmeca:becauseOf owl:inverseOf s:causallyRelated .
+fmeca: theEffectIs owl:equivalentProperty s:causallyRelated .
+
+# explanation odp
+expodp:hasExplanandum owl:equivalentProperty s:explains .
+expopd:isBasedOn owl:equivalentProperty s:hasCausalSource .

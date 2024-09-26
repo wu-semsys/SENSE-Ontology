@@ -174,7 +174,7 @@ s:Event a owl:Class ;
 s:State a owl:Class ;
     rdfs:label "State" ;
     rdfs:subClassOf sosa:Result ;
-    owl:disjointWith s:State .
+    owl:disjointWith s:Event .
 
 s:causallyRelated a owl:ObjectProperty ;
     rdfs:label "causally related" .

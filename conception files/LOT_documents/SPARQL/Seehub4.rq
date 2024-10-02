@@ -1,0 +1,14 @@
+PREFIX s: <http://w3id.org/explainability/sense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX : <http://example.org/seehub#>
+select 
+?s ?startTime ?endTime 
+where { 
+    VALUES ?s { s:DemandEnvelopeViolation_State_3e4b0aa1-eede-438e-9cc0-bbd2de29725b }
+	?s s:hasStartEvent ?startEvent .
+    ?s s:hasEndEvent ?endEvent .
+    ?startObservation sosa:hasResult ?startEvent .
+    ?startObservation sosa:phenomenonTime ?startTime .
+    ?endObservation sosa:hasResult ?endEvent .
+    ?endObservation sosa:phenomenonTime ?endTime .
+} limit 100 

@@ -1,0 +1,10 @@
+PREFIX s: <http://w3id.org/explainability/sense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+select 
+*
+where { 
+    VALUES ?s { s:DemandEnvelopeViolation_State_720ccb78-79bc-49a5-8406-d8298b076742 }
+    ?o sosa:hasResult ?s .
+    ?sensor sosa:madeObservation ?o .
+    ?platform sosa:hosts ?sensor
+}

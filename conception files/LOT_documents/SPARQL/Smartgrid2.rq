@@ -1,0 +1,9 @@
+PREFIX s: <http://w3id.org/explainability/sense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX : <http://example.org/seehub#>
+select ?parent
+where { 
+    VALUES ?p { :AllEVChargers1 }
+    ?parent sosa:hosts ?p .
+    
+} 

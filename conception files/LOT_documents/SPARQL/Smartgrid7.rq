@@ -1,0 +1,9 @@
+PREFIX s: <http://w3id.org/explainability/sense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX : <http://example.org/seehub#>
+select ?property
+where { 
+    VALUES ?p { :AP_AllEVChargers1_Sensor }
+    ?p sosa:observes ?property
+    
+} 

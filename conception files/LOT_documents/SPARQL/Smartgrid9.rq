@@ -1,0 +1,15 @@
+PREFIX s: <http://w3id.org/explainability/sense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX : <http://example.org/seehub#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+select *
+where { 
+    VALUES ?p { :AllEVChargers1 }
+    ?p sosa:hosts ?sensor .
+    ?sensor s:hasSensorType ?sensortype .
+    #?sensortype rdfs:subClassOf ?sensortypeup .
+    ?stateType s:associatedSensorType ?sensortype .
+    ?causality s:effect ?stateType .
+    ?causality s:cause ?cause .
+    ?cause s:associatedSensorType ?causesensortype .
+}

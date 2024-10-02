@@ -1,0 +1,10 @@
+PREFIX s: <http://w3id.org/explainability/sense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX : <http://example.org/seehub#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+select *
+where { 
+    VALUES ?s { s:BatteryDischarging_State_b581afdd-3cfd-42fe-90f0-f51e35ba50e6 }
+    ?o sosa:hasResult ?s .
+    ?sensor sosa:madeObservation ?o .
+} 

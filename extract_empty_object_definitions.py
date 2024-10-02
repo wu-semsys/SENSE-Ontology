@@ -22,7 +22,7 @@ def extract_classes_and_object_properties(ttl_file):
 
 # Example usage
 if __name__ == "__main__":
-    ttl_file_root = "SENSE v1.0.ttl"  # Replace with the path to your Turtle file
+    ttl_file_root = "./ontology files/SENSE v1.0.ttl"  # Replace with the path to your Turtle file
     objects = extract_classes_and_object_properties(ttl_file_root)
 
     print("#empty objects:")

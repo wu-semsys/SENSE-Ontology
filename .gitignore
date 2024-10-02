@@ -1,2 +1,4 @@
 *.bkp
 *.dtmp
+images/*
+*DS_Store

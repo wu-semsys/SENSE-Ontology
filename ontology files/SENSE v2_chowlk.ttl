@@ -1,0 +1,332 @@
+@prefix base: <http://w3id.org/explainability/sense#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <https://www.w3.org/ns/ssn/> .
+
+dc:creator a owl:AnnotationProperty .
+
+dc:title a owl:AnnotationProperty .
+
+qudt:hasUnit a owl:DatatypeProperty ;
+    rdfs:label "has unit" .
+
+base: a owl:Ontology ;
+    dc:creator "Fajar J. Ekaputra",
+        "Katrin Schreiberhuber" ;
+    dc:title "SENSE Ontology" ;
+    owl:versionInfo "2.0" ;
+    mod:createdWith <https://chowlk.linkeddata.es/> .
+
+base:allowsAccessTo a owl:ObjectProperty ;
+    rdfs:label "allows access to" ;
+    rdfs:domain base:AccessRight ;
+    rdfs:range sosa:PlatformOfInterest .
+
+base:associatedPlatformType a owl:ObjectProperty ;
+    rdfs:label "associated platform type" ;
+    rdfs:domain base:ResultType ;
+    rdfs:range base:PlatformType .
+
+base:associatedProperty a owl:ObjectProperty ;
+    rdfs:label "associated property" ;
+    rdfs:domain base:ResultType ;
+    rdfs:range sosa:ObservableProperty .
+
+base:bindsToLiteral a owl:DatatypeProperty ;
+    rdfs:label "binds to literal" .
+
+base:bindsToSensor a owl:ObjectProperty ;
+    rdfs:label "binds to sensor" ;
+    rdfs:domain base:ParameterBinding ;
+    rdfs:range sosa:Sensor .
+
+base:causalRelation a owl:DatatypeProperty ;
+    rdfs:label "causal relation" .
+
+base:causallyRelated a owl:ObjectProperty ;
+    rdfs:label "causally related" ;
+    rdfs:domain base:State ;
+    rdfs:range base:State .
+
+base:cause a owl:ObjectProperty ;
+    rdfs:label "cause" ;
+    rdfs:domain base:StateTypeCausality ;
+    rdfs:range base:StateType .
+
+base:considersUserType a owl:ObjectProperty ;
+    rdfs:label "considers user type" ;
+    rdfs:domain base:Explanation ;
+    rdfs:range base:UserType .
+
+base:considersViewAccessRights a owl:ObjectProperty ;
+    rdfs:label "considers view access rights" ;
+    rdfs:domain base:Explanation ;
+    rdfs:range base:ViewAccessRight .
+
+base:containsAccessRights a owl:ObjectProperty ;
+    rdfs:label "contains access rights" ;
+    rdfs:domain base:UserRole ;
+    rdfs:range base:AccessRight .
+
+base:containsMitigationOption a owl:ObjectProperty ;
+    rdfs:label "contains mitigation option" ;
+    rdfs:domain base:MitigationPlan ;
+    rdfs:range base:MitigationOption .
+
+base:dataSource a owl:DatatypeProperty ;
+    rdfs:label "data source" .
+
+base:definition a owl:DatatypeProperty ;
+    rdfs:label "definition" .
+
+base:designedFor a owl:ObjectProperty ;
+    rdfs:label "designed for" ;
+    rdfs:domain base:Explanation ;
+    rdfs:range base:User .
+
+base:detectedBy a owl:ObjectProperty ;
+    rdfs:label "detected by" ;
+    rdfs:domain base:EventType ;
+    rdfs:range base:EventDetection .
+
+base:effect a owl:ObjectProperty ;
+    rdfs:label "effect" ;
+    rdfs:domain base:StateTypeCausality ;
+    rdfs:range base:StateType .
+
+base:explains a owl:ObjectProperty ;
+    rdfs:label "explains" ;
+    rdfs:domain base:Explanation ;
+    rdfs:range base:State .
+
+base:hasEndEvent a owl:ObjectProperty ;
+    rdfs:label "has end event" ;
+    rdfs:domain base:State ;
+    rdfs:range base:Event .
+
+base:hasEndEventType a owl:ObjectProperty ;
+    rdfs:label "has end event type" ;
+    rdfs:domain base:StateType ;
+    rdfs:range base:EventType .
+
+base:hasMitigationPlan a owl:ObjectProperty ;
+    rdfs:label "has mitigation plan" ;
+    rdfs:domain base:StateType ;
+    rdfs:range base:MitigationPlan .
+
+base:hasParameterBinding a owl:ObjectProperty ;
+    rdfs:label "has parameter binding" ;
+    rdfs:domain base:EventDetection ;
+    rdfs:range base:ParameterBinding .
+
+base:hasPlatformType a owl:ObjectProperty ;
+    rdfs:label "has platform type" ;
+    rdfs:domain sosa:PlatformOfInterest ;
+    rdfs:range base:PlatformType .
+
+base:hasProperty a owl:ObjectProperty ;
+    rdfs:label "has property" ;
+    rdfs:domain base:PlatformType ;
+    rdfs:range sosa:ObservableProperty .
+
+base:hasResultType a owl:ObjectProperty ;
+    rdfs:label "has result type" ;
+    rdfs:domain sosa:Result ;
+    rdfs:range base:ResultType .
+
+base:hasStartEvent a owl:ObjectProperty ;
+    rdfs:label "has start event" ;
+    rdfs:domain base:State ;
+    rdfs:range base:Event .
+
+base:hasStartEventType a owl:ObjectProperty ;
+    rdfs:label "has start event type" ;
+    rdfs:domain base:StateType ;
+    rdfs:range base:EventType .
+
+base:hasUserRole a owl:ObjectProperty ;
+    rdfs:label "has user role" ;
+    rdfs:domain base:User ;
+    rdfs:range base:UserRole .
+
+base:hasUserType a owl:ObjectProperty ;
+    rdfs:label "has user type" ;
+    rdfs:domain base:User ;
+    rdfs:range base:UserType .
+
+base:interestedIn a owl:ObjectProperty ;
+    rdfs:label "interested in" ;
+    rdfs:domain base:User ;
+    rdfs:range base:StateType .
+
+base:isTriggerState a owl:DatatypeProperty ;
+    rdfs:label "is trigger state" .
+
+base:linkedToSensor a owl:ObjectProperty ;
+    rdfs:label "linked to sensor" ;
+    rdfs:domain base:VirtualSensor ;
+    rdfs:range sosa:Sensor .
+
+base:method a owl:DatatypeProperty ;
+    rdfs:label "method" .
+
+base:origin a owl:DatatypeProperty ;
+    rdfs:label "origin" .
+
+base:parameterName a owl:DatatypeProperty ;
+    rdfs:label "parameter name" .
+
+base:requiresControlAccessRights a owl:ObjectProperty ;
+    rdfs:label "requires control access rights" ;
+    rdfs:domain base:MitigationOption ;
+    rdfs:range base:ControlAccessRight .
+
+base:suggests a owl:ObjectProperty ;
+    rdfs:label "suggests" ;
+    rdfs:domain base:Explanation ;
+    rdfs:range base:MitigationOption .
+
+base:temporalRelation a owl:DatatypeProperty ;
+    rdfs:label "temporal relation" .
+
+base:topologicalRelation a owl:DatatypeProperty ;
+    rdfs:label "topological relation" .
+
+owl:versionInfo a owl:AnnotationProperty .
+
+sosa:hasFeatureOfInterest a owl:ObjectProperty ;
+    rdfs:label "has feature of interest" ;
+    rdfs:domain sosa:Observation ;
+    rdfs:range sosa:PlatformOfInterest .
+
+sosa:hasResult a owl:ObjectProperty ;
+    rdfs:label "has result" ;
+    rdfs:domain sosa:Observation ;
+    rdfs:range sosa:Result .
+
+sosa:hosts a owl:ObjectProperty ;
+    rdfs:label "hosts" .
+
+sosa:madeObservation a owl:ObjectProperty ;
+    rdfs:label "made observation" ;
+    rdfs:domain sosa:Sensor ;
+    rdfs:range sosa:Observation .
+
+sosa:observedProperty a owl:ObjectProperty ;
+    rdfs:label "observed property" ;
+    rdfs:domain sosa:Observation ;
+    rdfs:range sosa:ObservableProperty .
+
+sosa:observes a owl:ObjectProperty ;
+    rdfs:label "observes" ;
+    rdfs:domain sosa:Sensor ;
+    rdfs:range sosa:ObservableProperty .
+
+sosa:phenomenonTime a owl:DatatypeProperty ;
+    rdfs:label "phenomenon time" .
+
+sosa:usedProcedure a owl:ObjectProperty ;
+    rdfs:label "used procedure" ;
+    rdfs:domain sosa:Observation ;
+    rdfs:range sosa:Procedure .
+
+ssn:implements a owl:ObjectProperty ;
+    rdfs:label "implements" ;
+    rdfs:domain sosa:Sensor ;
+    rdfs:range sosa:Procedure .
+
+base:ControlAccessRight a owl:Class ;
+    rdfs:label "Control Access Right" ;
+    rdfs:subClassOf base:AccessRight .
+
+base:ViewAccessRight a owl:Class ;
+    rdfs:label "View Access Right" ;
+    rdfs:subClassOf base:AccessRight .
+
+base:VirtualSensor a owl:Class ;
+    rdfs:label "Virtual Sensor" ;
+    rdfs:subClassOf sosa:Sensor .
+
+sosa:FeatureOfInterest a owl:Class ;
+    rdfs:label "Feature Of Interest" .
+
+sosa:Platform a owl:Class ;
+    rdfs:label "Platform" .
+
+base:Event a owl:Class ;
+    rdfs:label "Event" ;
+    rdfs:subClassOf sosa:Result .
+
+base:EventDetection a owl:Class ;
+    rdfs:label "Event Detection" ;
+    rdfs:subClassOf sosa:Procedure .
+
+base:MitigationPlan a owl:Class ;
+    rdfs:label "Mitigation Plan" .
+
+base:ParameterBinding a owl:Class ;
+    rdfs:label "Parameter Binding" .
+
+base:StateTypeCausality a owl:Class ;
+    rdfs:label "State Type Causality" .
+
+base:UserRole a owl:Class ;
+    rdfs:label "User Role" .
+
+base:UserType a owl:Class ;
+    rdfs:label "User Type" .
+
+base:EventType a owl:Class ;
+    rdfs:label "Event Type" ;
+    rdfs:subClassOf base:ResultType .
+
+base:MitigationOption a owl:Class ;
+    rdfs:label "Mitigation Option" .
+
+base:PlatformType a owl:Class ;
+    rdfs:label "Platform Type" .
+
+sosa:PlatformOfInterest a owl:Class ;
+    rdfs:label "Platform Of Interest" ;
+    rdfs:subClassOf sosa:FeatureOfInterest,
+        sosa:Platform .
+
+sosa:Procedure a owl:Class ;
+    rdfs:label "Procedure" .
+
+base:AccessRight a owl:Class ;
+    rdfs:label "Access Right" .
+
+base:User a owl:Class ;
+    rdfs:label "User" .
+
+sosa:ObservableProperty a owl:Class ;
+    rdfs:label "Observable Property" .
+
+sosa:Result a owl:Class ;
+    rdfs:label "Result" .
+
+base:Explanation a owl:Class ;
+    rdfs:label "Explanation" .
+
+base:ResultType a owl:Class ;
+    rdfs:label "Result Type" .
+
+base:State a owl:Class ;
+    rdfs:label "State" ;
+    rdfs:subClassOf sosa:Result .
+
+sosa:Observation a owl:Class ;
+    rdfs:label "Observation" .
+
+base:StateType a owl:Class ;
+    rdfs:label "State Type" ;
+    rdfs:subClassOf base:ResultType .
+
+sosa:Sensor a owl:Class ;
+    rdfs:label "Sensor" .
+

@@ -1,0 +1,24 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sense: <http://w3id.org/explainability/sense#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <https://www.w3.org/ns/ssn/> .
+
+sosa:isHostedBy a owl:ObjectProperty ;
+    rdfs:label "is hosted by" ;
+    rdfs:domain sosa:Sensor ;
+    rdfs:range sosa:Platform .
+
+sense:isStartEventType a owl:ObjectProperty ;
+	rdfs:label "is start event type" ;
+	rdfs:domain sense:EventType ;
+	rdfs:range sense:StateType 
+	owl:inverseOf sense:hasStartEventType .
+	
+sense:isEndEventType a owl:ObjectProperty ;
+	rdfs:label "is end event type" ;
+	rdfs:domain sense:EventType ;
+	rdfs:range sense:StateType 
+	owl:inverseOf sense:hasEndEventType .	

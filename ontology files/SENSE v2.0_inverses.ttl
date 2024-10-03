@@ -9,16 +9,17 @@
 sosa:isHostedBy a owl:ObjectProperty ;
     rdfs:label "is hosted by" ;
     rdfs:domain sosa:Sensor ;
-    rdfs:range sosa:Platform .
+    rdfs:range sosa:Platform ;
+	owl:inverseOf sosa:hosts .
 
-sense:isStartEventType a owl:ObjectProperty ;
-	rdfs:label "is start event type" ;
+sense:startsStateType a owl:ObjectProperty ;
+	rdfs:label "starts state type" ;
 	rdfs:domain sense:EventType ;
-	rdfs:range sense:StateType 
+	rdfs:range sense:StateType ;
 	owl:inverseOf sense:hasStartEventType .
 	
-sense:isEndEventType a owl:ObjectProperty ;
-	rdfs:label "is end event type" ;
+sense:endsStateType a owl:ObjectProperty ;
+	rdfs:label "ends state type" ;
 	rdfs:domain sense:EventType ;
-	rdfs:range sense:StateType 
+	rdfs:range sense:StateType ;
 	owl:inverseOf sense:hasEndEventType .	

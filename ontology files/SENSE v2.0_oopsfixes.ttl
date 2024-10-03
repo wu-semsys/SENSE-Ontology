@@ -1,7 +1,7 @@
-@prefix : <http://w3id.org/explainability/sense#> .
+@prefix sense: <http://w3id.org/explainability/sense#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
 # add disjointness between subclasses of Result
-s:Event owl:disjointWith s:State .
+sense:Event owl:disjointWith sense:State .
 
-s:EventType owl:disjointWith s:StateType .
+sense:EventType owl:disjointWith sense:StateType .

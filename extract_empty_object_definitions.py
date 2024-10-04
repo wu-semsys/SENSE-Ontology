@@ -26,8 +26,13 @@ def check_missing_rdfs_comments(ttl_file):
         }
         UNION
         {
-            ?entity a rdf:Property .
-            BIND("Property" AS ?type)
+            ?entity a owl:ObjectProperty .
+            BIND("ObjectProperty" AS ?type)
+        }
+        UNION
+        {
+            ?entity a owl:DatatypeProperty .
+            BIND("DatatypeProperty" AS ?type)
         }
     }
     """

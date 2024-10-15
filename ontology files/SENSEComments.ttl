@@ -77,10 +77,6 @@ sense:EventToStateConversion rdfs:comment "A Procedure that is used to convert a
 
 sense:EventType rdfs:comment "A type of event. Each event has an event type." .
 
-
-sense:SensorType rdfs:comment "A type of a sensor. Each sensor as a sensor type." .
-
-
 sense:State rdfs:comment "A state of a sensor. A state is a condition of a sensor over a period of time. A state is started and ended by an event." .
 
 
@@ -91,9 +87,6 @@ sense:StateTypeCausality rdfs:comment "A type causality relation between two sta
 
 
 sense:algorithm rdfs:comment "A reference to an algorithm, which implements a procedure" .
-
-
-sense:associatedSensorType rdfs:comment "relation between a state type and the sensor type, where such a state type can occur." .
 
 
 sense:causalRelation rdfs:comment "A type of causal relation, which can be one of three options: causes, prevents, enables" .
@@ -124,10 +117,6 @@ sense:hasEndEventType rdfs:comment "Relation between a state type and an event t
 
 
 sense:hasEventType rdfs:comment "relation between an event and its event type." .
-
-
-sense:hasSensorType rdfs:comment "relation between a sensor and its sensor type." .
-
 
 sense:hasStartEvent rdfs:comment "relation between a state and the event that is starting the state." .
 

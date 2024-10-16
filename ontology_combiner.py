@@ -18,14 +18,13 @@ def combine_ontologies(ontology1_path, ontology2_paths, output_path):
 base_dir = os.path.dirname(os.path.abspath(__file__))
 ontology_dir = os.path.join(base_dir, 'ontology files')
 
-ontology1_path = os.path.join(ontology_dir, 'SENSE v1.0.ttl')
+ontology1_path = os.path.join(ontology_dir, 'SENSE v2.0_chowlk.ttl')
 ontology2_paths = [
     os.path.join(ontology_dir, 'SENSEComments.ttl'),
-    os.path.join(ontology_dir, 'SENSE v2.0_chowlk.ttl'),
     os.path.join(ontology_dir, 'SENSE v2.0_inverses.ttl'),
     os.path.join(ontology_dir, 'SENSE v2.0_oopsfixes.ttl')
 ]
 
-output_path = os.path.join(base_dir, 'sense.ttl')
+output_path = os.path.join(ontology_dir, 'SENSE v2.0.ttl')
 
 combine_ontologies(ontology1_path, ontology2_paths, output_path)

@@ -55,7 +55,8 @@ def check_missing_rdfs_comments(ttl_file):
     if missing_comments:
         print("Entities missing rdfs:comment:")
         for entity_qname, entity_type in missing_comments:
-            print(f" - [{entity_type}] {entity_qname}")
+            if entity_qname.startswith("sense"):
+                print(f" - [{entity_type}] {entity_qname}")
     else:
         print("All classes and properties have rdfs:comment annotations.")
 

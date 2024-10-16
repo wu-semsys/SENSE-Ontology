@@ -37,7 +37,7 @@ sense: a owl:Ontology ;
         "Katrin Schreiberhuber" ;
     dc:description "An ontology to create an explainable Cyber Physical System (CPS)"@en ;
     dc:license <https://creativecommons.org/licenses/by/4.0> ;
-    dc:modified "2024-04-02" ;
+    dc:modified "2024-10-16" ;
     dc:title "SENSE Ontology",
         "SENSE Ontology"@en ;
     vann:preferredNamespacePrefix "s" ;

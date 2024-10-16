@@ -60,5 +60,5 @@ def check_missing_rdfs_comments(ttl_file):
         print("All classes and properties have rdfs:comment annotations.")
 
 if __name__ == "__main__":
-    ttl_file_root = "sense.ttl"  # Replace with the path to your Turtle file
+    ttl_file_root = "./ontology files/SENSE v2.0.ttl"  # Replace with the path to your Turtle file
     check_missing_rdfs_comments(ttl_file_root)

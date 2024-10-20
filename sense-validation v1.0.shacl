@@ -5,14 +5,21 @@
 # Define the shape for the Sensor class
 sense:SensorShape
     a sh:NodeShape ;                            
-    sh:targetClass sense:Sensor ;                   
+    sh:targetClass sosa:Sensor ;                   
     sh:property [                                
         sh:path sense:hasSensorType ;                  
         sh:minCount 1 ;
 		sh:maxCount 1 ;
-		sh:class sense:SensorType
+		sh:class sense:SensorType;
         sh:message "Each Sensor must have a sensorType." ;  
-    ] 
+    ] ;
+    sh:property [
+		sh:path sosa:isHostedBy;
+		sh:minCount 1;
+		sh:maxCount 1;
+		sh:class sosa:Platform;
+		sh:message "Each Sensor must be hosted by a platform"
+	] ;
 .
 
 # Define the shape for the Platform class
@@ -22,6 +29,13 @@ sense:PlatformShape
 	sh:property [
 		sh:path sosa:hosts ;
 		sh:class sense:Sensor ;
+	];
+	sh:property [
+		sh:path sense:hasPlatformType;
+		sh:minCount 1;
+		sh:maxCount 1;
+		sh:class sense:PlatformType;
+		sh:message "Each Platform must have a Platform type"
 	]
 .
 
@@ -41,4 +55,30 @@ sense:StateTypeShape
 		sh:class sense:EventType ;
 		sh:message "A State Type must have a end Event Type." ;
 	] ;
+.
+	
+# Define the shape for the EventType class	
+sense:EventTypeShape
+	a sh:NodeShape ;
+	sh:targetClass sense:EventType ;
+	sh:or (
+    [
+      sh:property [
+        sh:path sense:isStartEventType ;
+		sh:minCount 1;
+		sh:maxCount 1;
+        sh:class sense:StateType ;
+		sh:message "An Event Type must be either a start or an end to a StateType"
+      ]
+    ]
+    [
+      sh:property [
+        sh:path sense:isEndEventType ;
+        sh:minCount 1;
+		sh:maxCount 1;
+        sh:class sense:StateType ;
+		sh:message "An Event Type must be either a start or an end to a StateType"
+      ]
+    ]
+  )
 .

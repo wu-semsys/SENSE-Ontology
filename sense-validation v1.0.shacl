@@ -64,7 +64,7 @@ sense:EventTypeShape
     sh:or (
         [
             sh:property [
-                sh:path sense:isStartEventType ;
+                sh:path sense:startsStateType ;
                 sh:minCount 1 ;
                 sh:maxCount 1 ;
                 sh:class sense:StateType ;
@@ -73,7 +73,7 @@ sense:EventTypeShape
         ]
         [
             sh:property [
-                sh:path sense:isEndEventType ;
+                sh:path sense:endsStateType ;
                 sh:minCount 1 ;
                 sh:maxCount 1 ;
                 sh:class sense:StateType ;

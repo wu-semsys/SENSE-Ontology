@@ -24,7 +24,7 @@ sense: a owl:Ontology ;
 sense:allowsAccessTo a owl:ObjectProperty ;
     rdfs:label "allows access to" ;
     rdfs:domain sense:AccessRight ;
-    rdfs:range sosa:PlatformOfInterest .
+    rdfs:range sense:PlatformOfInterest .
 
 sense:associatedPlatformType a owl:ObjectProperty ;
     rdfs:label "associated platform type" ;
@@ -125,7 +125,7 @@ sense:hasParameterBinding a owl:ObjectProperty ;
 
 sense:hasPlatformType a owl:ObjectProperty ;
     rdfs:label "has platform type" ;
-    rdfs:domain sosa:PlatformOfInterest ;
+    rdfs:domain sense:PlatformOfInterest ;
     rdfs:range sense:PlatformType .
 
 sense:hasProperty a owl:ObjectProperty ;
@@ -201,7 +201,7 @@ owl:versionInfo a owl:AnnotationProperty .
 sosa:hasFeatureOfInterest a owl:ObjectProperty ;
     rdfs:label "has feature of interest" ;
     rdfs:domain sosa:Observation ;
-    rdfs:range sosa:PlatformOfInterest .
+    rdfs:range sense:PlatformOfInterest .
 
 sosa:hasResult a owl:ObjectProperty ;
     rdfs:label "has result" ;
@@ -287,13 +287,13 @@ sense:EventType a owl:Class ;
 sense:MitigationOption a owl:Class ;
     rdfs:label "Mitigation Option" .
 
-sense:PlatformType a owl:Class ;
-    rdfs:label "Platform Type" .
-
-sosa:PlatformOfInterest a owl:Class ;
+sense:PlatformOfInterest a owl:Class ;
     rdfs:label "Platform Of Interest" ;
     rdfs:subClassOf sosa:FeatureOfInterest,
         sosa:Platform .
+
+sense:PlatformType a owl:Class ;
+    rdfs:label "Platform Type" .
 
 sosa:Procedure a owl:Class ;
     rdfs:label "Procedure" .

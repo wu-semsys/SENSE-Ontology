@@ -47,13 +47,11 @@ sense: a owl:Ontology ;
     owl:versionInfo "2.0" ;
     mod:createdWith <https://chowlk.linkeddata.es/> .
 
-sense:PlatformOfInterest rdfs:comment "A plaform, which can host sensors, but is also a feature of interest." .
-
 sense:allowsAccessTo a owl:ObjectProperty ;
     rdfs:label "allows access to" ;
     rdfs:comment "each access right defines access to a certain platform of the system. Access to this plaform means access to all sensors hosted by this platform." ;
     rdfs:domain sense:AccessRight ;
-    rdfs:range sosa:PlatformOfInterest .
+    rdfs:range sense:PlatformOfInterest .
 
 sense:associatedPlatformType a owl:ObjectProperty ;
     rdfs:label "associated platform type" ;
@@ -179,7 +177,7 @@ sense:hasParameterBinding a owl:ObjectProperty ;
 sense:hasPlatformType a owl:ObjectProperty ;
     rdfs:label "has platform type" ;
     rdfs:comment "A relation between a Plaform and its Platformtype." ;
-    rdfs:domain sosa:PlatformOfInterest ;
+    rdfs:domain sense:PlatformOfInterest ;
     rdfs:range sense:PlatformType .
 
 sense:hasProperty a owl:ObjectProperty ;
@@ -272,7 +270,7 @@ owl:versionInfo a owl:AnnotationProperty .
 sosa:hasFeatureOfInterest a owl:ObjectProperty ;
     rdfs:label "has feature of interest" ;
     rdfs:domain sosa:Observation ;
-    rdfs:range sosa:PlatformOfInterest .
+    rdfs:range sense:PlatformOfInterest .
 
 sosa:hasResult a owl:ObjectProperty ;
     rdfs:label "has result" ;
@@ -384,14 +382,15 @@ sense:MitigationOption a owl:Class ;
     rdfs:label "Mitigation Option" ;
     rdfs:comment "A mitigation option for a state type." .
 
+sense:PlatformOfInterest a owl:Class ;
+    rdfs:label "Platform Of Interest" ;
+    rdfs:comment "A plaform, which can host sensors, but is also a feature of interest." ;
+    rdfs:subClassOf sosa:FeatureOfInterest,
+        sosa:Platform .
+
 sense:PlatformType a owl:Class ;
     rdfs:label "Platform Type" ;
     rdfs:comment "A type of Platform. Each Platform has a Platform Type." .
-
-sosa:PlatformOfInterest a owl:Class ;
-    rdfs:label "Platform Of Interest" ;
-    rdfs:subClassOf sosa:FeatureOfInterest,
-        sosa:Platform .
 
 sosa:Procedure a owl:Class ;
     rdfs:label "Procedure" .

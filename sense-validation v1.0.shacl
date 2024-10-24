@@ -1,18 +1,19 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix sense: <http://w3id.org/explainability/sense#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 # Define the shape for the Sensor class
 sense:SensorShape
     a sh:NodeShape ;                            
-    sh:targetClass sosa:Sensor ;                   
-    sh:property [                                
-        sh:path sense:hasSensorType ;                  
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:class sense:SensorType ;
-        sh:message "Each Sensor must have a sensorType." ;  
-    ] ;
+    sh:targetClass sosa:Sensor ;
+	sh:property [
+		sh:path sosa:observes ;
+		sh:minCount 1 ;
+		sh:maxCount 1 ;
+		sh:class sosa:ObservableProperty ;
+		sh:message "Each Sensor must observes one ObservableProperty."
+	] ;
     sh:property [
         sh:path sosa:isHostedBy ;
         sh:minCount 1 ;
@@ -81,4 +82,17 @@ sense:EventTypeShape
             ]
         ]
     ) ;
+.
+
+# Define the shape for the PlatformOfInterest class
+sense:PlatformOfInterestShape
+    a sh:NodeShape ;
+    sh:targetClass sense:PlatformOfInterest ;
+    sh:property [
+        sh:path sense:hasPlatformType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:node sense:PlatformType ;
+        sh:message "A Platform of Interest must have a Platform Type that is a subclass of Platform Type."
+    ] ;
 .

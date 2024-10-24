@@ -1,7 +1,33 @@
 @prefix sense: <http://w3id.org/explainability/sense#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
 
 # add disjointness between subclasses of Result
 sense:Event owl:disjointWith sense:State .
 
 sense:EventType owl:disjointWith sense:StateType .
+
+# define domain and range for DataTypeProperties
+sense:definition rdfs:domain sense:EventDetection ;
+    rdfs:range xsd:string .
+sense:dataSource rdfs:domain sosa:Sensor ;
+    rdfs:range xsd:string .
+sense:parameterName rdfs:domain sense:ParameterBinding ;
+    rdfs:range xsd:string .
+sense:causalRelation rdfs:domain sense:StateTypeCausality ;
+    rdfs:range xsd:string .
+sense:origin rdfs:domain sense:VirtualSensor ;
+    rdfs:range xsd:string .
+sense:topologicalRelation rdfs:domain sense:StateTypeCausality ;
+    rdfs:range xsd:string .
+sense:isTriggerState rdfs:domain sense:isTriggerState ;
+    rdfs:range xsd:boolean .
+sense:bindsToLiteral rdfs:domain sense:ParameterBinding ;
+    rdfs:range xsd:string .
+sense:temporalRelation rdfs:domain sense:StateTypeCausality ;
+    rdfs:range xsd:string .
+sense:method rdfs:domain sense:EventDetection ;
+    rdfs:range xsd:string .

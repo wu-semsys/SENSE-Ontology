@@ -23,7 +23,7 @@ sense:origin rdfs:domain sense:VirtualSensor ;
     rdfs:range xsd:string .
 sense:topologicalRelation rdfs:domain sense:StateTypeCausality ;
     rdfs:range xsd:string .
-sense:isTriggerState rdfs:domain sense:isTriggerState ;
+sense:isTriggerState rdfs:domain sense:State ;
     rdfs:range xsd:boolean .
 sense:bindsToLiteral rdfs:domain sense:ParameterBinding ;
     rdfs:range xsd:string .

@@ -5,7 +5,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sense: <http://w3id.org/explainability/sense#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
-@prefix ssn: <https://www.w3.org/ns/ssn/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
 
 dc:creator a owl:AnnotationProperty .
 
@@ -128,7 +128,7 @@ sense:hasPlatformType a owl:ObjectProperty ;
     rdfs:domain sense:PlatformOfInterest ;
     rdfs:range sense:PlatformType .
 
-sense:hasProperty a owl:ObjectProperty ;
+sosa:hasProperty a owl:ObjectProperty ;
     rdfs:label "has property" ;
     rdfs:domain sense:PlatformType ;
     rdfs:range sosa:ObservableProperty .

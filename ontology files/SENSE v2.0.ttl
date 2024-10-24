@@ -5,7 +5,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sense: <http://w3id.org/explainability/sense#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
-@prefix ssn1: <https://www.w3.org/ns/ssn/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -44,7 +44,7 @@ sense: a owl:Ontology ;
     vann:preferredNamespacePrefix "s" ;
     vann:preferredNamespaceUri "http://w3id.org/explainability/sense#" ;
     owl:imports sosa:,
-        ssn1: ;
+        ssn: ;
     owl:versionInfo "2.0" ;
     mod:createdWith <https://chowlk.linkeddata.es/> .
 
@@ -189,7 +189,7 @@ sense:hasPlatformType a owl:ObjectProperty ;
     rdfs:domain sense:PlatformOfInterest ;
     rdfs:range sense:PlatformType .
 
-sense:hasProperty a owl:ObjectProperty ;
+ssn:hasProperty a owl:ObjectProperty ;
     rdfs:label "has property" ;
     rdfs:comment "Each Plaformtype has observable properties, which can be observed. These properties are defining the states of a feature of interest." ;
     rdfs:domain sense:PlatformType ;
@@ -321,7 +321,7 @@ sosa:usedProcedure a owl:ObjectProperty ;
     rdfs:domain sosa:Observation ;
     rdfs:range sosa:Procedure .
 
-ssn1:implements a owl:ObjectProperty ;
+ssn:implements a owl:ObjectProperty ;
     rdfs:label "implements" ;
     rdfs:domain sosa:Sensor ;
     rdfs:range sosa:Procedure .
@@ -351,7 +351,7 @@ sense:hasStartEventType a owl:ObjectProperty ;
 sense:isTriggerState a owl:DatatypeProperty ;
     rdfs:label "is trigger state" ;
     rdfs:comment "A boolean value, whether a StateType is interesting to trigger and explanation." ;
-    rdfs:domain sense:isTriggerState ;
+    rdfs:domain sense:State ;
     rdfs:range xsd:boolean .
 
 sosa:FeatureOfInterest a owl:Class ;

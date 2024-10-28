@@ -78,14 +78,14 @@ sense:dataSource rdfs:comment "reference to the time series data that is collect
 sense:linkedToSensor rdfs:comment "It defines, which sensor measurements are needed to calculate the data of a virtual sensor." .
 
 # Observation Knowledge
-sense:EventDetection rdfs:comment "A procedure to detect an event in the system." .
-sense:definition rdfs:comment "" .
-sense:method rdfs:comment "" .
-sense:hasParameterBinding rdfs:comment "" .
-sense:ParameterBinding rdfs:comment "" .
-sense:parameterName rdfs:comment "" .
-sense:bindsToLiteral rdfs:comment "" .
-sense:bindsToSensor rdfs:comment "" .
+sense:EventDetection rdfs:comment "A procedure to detect an event in the system. The method of this procedure defines which event specification method is used. The definition of a procedure defines the exact conditions for detecting an event and is formulated according to the method employed." .
+sense:definition rdfs:comment "Relation between an EventDetection procedure and the definition of what causes an event. The syntax and semantics of the definition depend on the employed method." .
+sense:method rdfs:comment "Relation between the EventDetection procedure and the employed event specification method. This specification method affects the syntax and semantics of the associated definition." .
+sense:hasParameterBinding rdfs:comment "Relation between the EventDetection procedure and a ParameterBinding." .
+sense:ParameterBinding rdfs:comment "A parameter binding connects parameters from the EventDetection's definition to a literal or a sensor. Examples of parameters are the variables in a formula." .
+sense:parameterName rdfs:comment "Relation between a ParameterBinding and its name." .
+sense:bindsToLiteral rdfs:comment "Relation between a ParameterBinding and the literal to which it should bind to. Example: '5' could bind a value in a formula to the literal 5." .
+sense:bindsToSensor rdfs:comment "Relation between a ParameterBinding and the sensor to which it should bind." .
 
 sense:ResultType rdfs:comment "A type of Result. This is usually a State Type or an Event Type." .
 sense:associatedProperty rdfs:comment "Each result type is detected by measurement of an observable Property, its associated Property." .

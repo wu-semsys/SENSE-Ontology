@@ -44,7 +44,7 @@ sense: a owl:Ontology ;
     vann:preferredNamespacePrefix "s" ;
     vann:preferredNamespaceUri "http://w3id.org/explainability/sense#" ;
     owl:imports sosa:,
-        ssn: ;
+        <https://www.w3.org/ns/ssn/> ;
     owl:versionInfo "2.0" ;
     mod:createdWith <https://chowlk.linkeddata.es/> .
 
@@ -68,13 +68,13 @@ sense:associatedProperty a owl:ObjectProperty ;
 
 sense:bindsToLiteral a owl:DatatypeProperty ;
     rdfs:label "binds to literal" ;
-    rdfs:comment "" ;
+    rdfs:comment "Relation between a ParameterBinding and the literal to which it should bind to. Example: '5' could bind a value in a formula to the literal 5." ;
     rdfs:domain sense:ParameterBinding ;
     rdfs:range xsd:string .
 
 sense:bindsToSensor a owl:ObjectProperty ;
     rdfs:label "binds to sensor" ;
-    rdfs:comment "" ;
+    rdfs:comment "Relation between a ParameterBinding and the sensor to which it should bind." ;
     rdfs:domain sense:ParameterBinding ;
     rdfs:range sosa:Sensor .
 
@@ -128,7 +128,7 @@ sense:dataSource a owl:DatatypeProperty ;
 
 sense:definition a owl:DatatypeProperty ;
     rdfs:label "definition" ;
-    rdfs:comment "" ;
+    rdfs:comment "Relation between an EventDetection procedure and the definition of what causes an event. The syntax and semantics of the definition depend on the employed method." ;
     rdfs:domain sense:EventDetection ;
     rdfs:range xsd:string .
 
@@ -179,7 +179,7 @@ sense:hasMitigationPlan a owl:ObjectProperty ;
 
 sense:hasParameterBinding a owl:ObjectProperty ;
     rdfs:label "has parameter binding" ;
-    rdfs:comment "" ;
+    rdfs:comment "Relation between the EventDetection procedure and a ParameterBinding." ;
     rdfs:domain sense:EventDetection ;
     rdfs:range sense:ParameterBinding .
 
@@ -189,11 +189,7 @@ sense:hasPlatformType a owl:ObjectProperty ;
     rdfs:domain sense:PlatformOfInterest ;
     rdfs:range sense:PlatformType .
 
-ssn:hasProperty a owl:ObjectProperty ;
-    rdfs:label "has property" ;
-    rdfs:comment "Each Plaformtype has observable properties, which can be observed. These properties are defining the states of a feature of interest." ;
-    rdfs:domain sense:PlatformType ;
-    rdfs:range sosa:ObservableProperty .
+sense:hasProperty rdfs:comment "Each Plaformtype has observable properties, which can be observed. These properties are defining the states of a feature of interest." .
 
 sense:hasResultType a owl:ObjectProperty ;
     rdfs:label "has result type" ;
@@ -225,6 +221,12 @@ sense:interestedIn a owl:ObjectProperty ;
     rdfs:domain sense:User ;
     rdfs:range sense:StateType .
 
+sense:isTriggerState a owl:DatatypeProperty ;
+    rdfs:label "is trigger state" ;
+    rdfs:comment "A boolean value, whether a StateType is interesting to trigger and explanation." ;
+    rdfs:domain sense:State ;
+    rdfs:range xsd:boolean .
+
 sense:linkedToSensor a owl:ObjectProperty ;
     rdfs:label "linked to sensor" ;
     rdfs:comment "It defines, which sensor measurements are needed to calculate the data of a virtual sensor." ;
@@ -233,7 +235,7 @@ sense:linkedToSensor a owl:ObjectProperty ;
 
 sense:method a owl:DatatypeProperty ;
     rdfs:label "method" ;
-    rdfs:comment "" ;
+    rdfs:comment "Relation between the EventDetection procedure and the employed event specification method. This specification method affects the syntax and semantics of the associated definition." ;
     rdfs:domain sense:EventDetection ;
     rdfs:range xsd:string .
 
@@ -245,7 +247,7 @@ sense:origin a owl:DatatypeProperty ;
 
 sense:parameterName a owl:DatatypeProperty ;
     rdfs:label "parameter name" ;
-    rdfs:comment "" ;
+    rdfs:comment "Relation between a ParameterBinding and its name." ;
     rdfs:domain sense:ParameterBinding ;
     rdfs:range xsd:string .
 
@@ -286,6 +288,11 @@ sosa:hasFeatureOfInterest a owl:ObjectProperty ;
     rdfs:label "has feature of interest" ;
     rdfs:domain sosa:Observation ;
     rdfs:range sense:PlatformOfInterest .
+
+sosa:hasProperty a owl:ObjectProperty ;
+    rdfs:label "has property" ;
+    rdfs:domain sense:PlatformType ;
+    rdfs:range sosa:ObservableProperty .
 
 sosa:hasResult a owl:ObjectProperty ;
     rdfs:label "has result" ;
@@ -348,12 +355,6 @@ sense:hasStartEventType a owl:ObjectProperty ;
     rdfs:domain sense:StateType ;
     rdfs:range sense:EventType .
 
-sense:isTriggerState a owl:DatatypeProperty ;
-    rdfs:label "is trigger state" ;
-    rdfs:comment "A boolean value, whether a StateType is interesting to trigger and explanation." ;
-    rdfs:domain sense:State ;
-    rdfs:range xsd:boolean .
-
 sosa:FeatureOfInterest a owl:Class ;
     rdfs:label "Feature Of Interest" .
 
@@ -409,12 +410,12 @@ sense:AccessRight a owl:Class ;
 
 sense:EventDetection a owl:Class ;
     rdfs:label "Event Detection" ;
-    rdfs:comment "A procedure to detect an event in the system." ;
+    rdfs:comment "A procedure to detect an event in the system. The method of this procedure defines which event specification method is used. The definition of a procedure defines the exact conditions for detecting an event and is formulated according to the method employed." ;
     rdfs:subClassOf sosa:Procedure .
 
 sense:ParameterBinding a owl:Class ;
     rdfs:label "Parameter Binding" ;
-    rdfs:comment "" .
+    rdfs:comment "A parameter binding connects parameters from the EventDetection's definition to a literal or a sensor. Examples of parameters are the variables in a formula." .
 
 sense:User a owl:Class ;
     rdfs:label "User" ;
@@ -460,4 +461,4 @@ sense:StateType a owl:Class ;
     rdfs:comment "A type of a state. Each state has a state type." ;
     rdfs:subClassOf sense:ResultType .
 
-<<sense:State sense:causallyRelated sense:State>> sense:hasCausalSource sense:StateTypeCausality .
+<< sense:State sense:causallyRelated sense:State >> sense:hasCausalSource sense:StateTypeCausality .

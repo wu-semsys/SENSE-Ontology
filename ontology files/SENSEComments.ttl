@@ -1,0 +1,154 @@
+@prefix : <http://w3id.org/explainability/sense#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ssn: <https://www.w3.org/ns/ssn/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix sense: <http://w3id.org/explainability/sense#> .
+@base <http://w3id.org/explainability/sense#> .
+
+<http://w3id.org/explainability/sense#> rdf:type owl:Ontology ;
+                                         owl:imports sosa: ,
+                                                     ssn: ;
+                                         dc:contributor "Gernot Steindl" ,
+                                                        "Ioan Toma" ,
+                                                        "Marta Sabou" ,
+                                                        "Mohammad Bilal" ,
+                                                        "Simon Steyskal" ,
+                                                        "Thomas Frühwirth" ;
+                                         dc:created "2023-11-01" ;
+                                         dc:creator "Fajar J. Ekaputra" ,
+                                                    "Katrin Schreiberhuber" ;
+                                         dc:description "An ontology to create an explainable Cyber Physical System (CPS)"@en ;
+                                         dc:license <https://creativecommons.org/licenses/by/4.0> ;
+                                         dc:modified "2024-10-16" ;
+                                         dc:title "SENSE Ontology"@en ;
+                                         <http://purl.org/vocab/vann/preferredNamespacePrefix> "s" ;
+                                         <http://purl.org/vocab/vann/preferredNamespaceUri> "http://w3id.org/explainability/sense#" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/contributor
+dc:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/created
+dc:created rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/license
+dc:license rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/modified
+dc:modified rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+# Topological Knowledge
+sense:PlatformType rdfs:comment "A type of Platform. Each Platform has a Platform Type." .
+sense:PlatformOfInterest rdfs:comment "A plaform, which can host sensors, but is also a feature of interest." .
+sense:hasPlatformType rdfs:comment "A relation between a Plaform and its Platformtype." .
+sense:hasProperty rdfs:comment "Each Plaformtype has observable properties, which can be observed. These properties are defining the states of a feature of interest." .
+
+sense:VirtualSensor rdfs:comment "A sensor, which implicitly collects data about the system. This sensor data is not collected directly, but it can be calculated through a combination of other sensors." .
+sense:origin rdfs:comment "The formula needed to calculated the measurements of a virtual sensor." .
+sense:dataSource rdfs:comment "reference to the time series data that is collected by a Sensor." .
+sense:linkedToSensor rdfs:comment "It defines, which sensor measurements are needed to calculate the data of a virtual sensor." .
+
+# Observation Knowledge
+sense:EventDetection rdfs:comment "A procedure to detect an event in the system. The method of this procedure defines which event specification method is used. The definition of a procedure defines the exact conditions for detecting an event and is formulated according to the method employed." .
+sense:definition rdfs:comment "Relation between an EventDetection procedure and the definition of what causes an event. The syntax and semantics of the definition depend on the employed method." .
+sense:method rdfs:comment "Relation between the EventDetection procedure and the employed event specification method. This specification method affects the syntax and semantics of the associated definition." .
+sense:hasParameterBinding rdfs:comment "Relation between the EventDetection procedure and a ParameterBinding." .
+sense:ParameterBinding rdfs:comment "A parameter binding connects parameters from the EventDetection's definition to a literal or a sensor. Examples of parameters are the variables in a formula." .
+sense:parameterName rdfs:comment "Relation between a ParameterBinding and its name." .
+sense:bindsToLiteral rdfs:comment "Relation between a ParameterBinding and the literal to which it should bind to. Example: '5' could bind a value in a formula to the literal 5." .
+sense:bindsToSensor rdfs:comment "Relation between a ParameterBinding and the sensor to which it should bind." .
+
+sense:ResultType rdfs:comment "A type of Result. This is usually a State Type or an Event Type." .
+sense:associatedProperty rdfs:comment "Each result type is detected by measurement of an observable Property, its associated Property." .
+sense:hasResultType rdfs:comment "each Result has a result type." .
+sense:associatedPlatformType rdfs:comment "each result type can only be detected at a specified platform type, the associated platform type." .
+
+
+# Causal Knowledge
+sense:Event rdfs:comment "something happening in the system, which is of interest. An event is always considered to be happening at a single time point." .
+sense:EventType rdfs:comment "A type of event. Each event has an event type." .
+sense:detectedBy rdfs:comment "each event type is detected by an event detection method." .
+sense:startsStateType  rdfs:comment "inverse of hasStartEventType, relation from an Event to the state started by the event." .
+sense:endsStateType rdfs:comment "inverse of hasEndEventType, relation from an Event to the state ended by the event." .
+
+sense:State rdfs:comment "A state of a sensor. A state is a condition of a sensor over a period of time. A state is started and ended by an event." .
+sense:StateType rdfs:comment "A type of a state. Each state has a state type." .
+sense:isTriggerState rdfs:comment "A boolean value, whether a StateType is interesting to trigger and explanation." .
+sense:hasEndEvent rdfs:comment "relation between a state and the event that is ending the state." .
+sense:hasEndEventType rdfs:comment "Relation between a state type and an event type. Describes which event type ends a certain state type." .
+sense:hasStartEvent rdfs:comment "relation between a state and the event that is starting the state." .
+sense:hasStartEventType rdfs:comment "Relation between a state type and an event type. Describes which event type starts a certain state type." .
+sense:hasMitigationPlan rdfs:comment "each state type has a mitigation plan, which contains a list of mitigation options of a certain state type." .
+
+sense:StateTypeCausality rdfs:comment "A type causality relation between two state types." .
+sense:cause rdfs:comment "Relation between a state type causality and the state type that is the cause of the relation." .
+sense:effect rdfs:comment "Relation between a state type causality and the state type that is the effect of the relation." .
+sense:causalRelation rdfs:comment "A type of causal relation, which can be one of three options: causes, prevents, enables" .
+sense:temporalRelation rdfs:comment "A type of temporal relation, which can be one of four options: before, overlaps, contains, identity" .
+sense:topologicalRelation rdfs:comment "A type of topological relation, which can be one of three options: samePlatform, siblingPlatform, parentPlatform" .
+
+sense:causallyRelated rdfs:comment "A causal relation between two state instances." .
+sense:hasCausalSource rdfs:comment "An RDF-star relation from a causallyRelated-triple to the state type causality, which is responsible for the causal relation." .
+
+
+# User-Context Knowledge
+sense:User rdfs:comment "A system user, who requires explanations." .
+sense:interestedIn rdfs:comment "A relation from a user to the state types a user is interested in." .
+sense:hasUserRole rdfs:comment "relation from a user to their user role." .
+sense:hasUserType rdfs:comment "relation from a user to their user." .
+
+sense:UserType rdfs:comment "Type of user, in terms of technicality level. Each user has a preferred means of explanation and technicality level, which is defined by this class." .
+sense:UserRole rdfs:comment "User role in terms of access rights. each user has a user role, which allows them access to a part of the system." .
+sense:containsAccessRights rdfs:comment "Each user role is connected to a set of access rights." .
+
+sense:AccessRight rdfs:comment "Access Rights, defining access to platforms of the system." .
+sense:ViewAccessRight rdfs:comment "View access rights define, which parts of the system can be viewed/contained in an explanation for this user role." .
+sense:ControlAccessRight rdfs:comment "Control access rights define which parts of the system can be manipulated by this user role." .
+sense:allowsAccessTo rdfs:comment "each access right defines access to a certain platform of the system. Access to this plaform means access to all sensors hosted by this platform." .
+
+
+# Explanation Knowledge
+sense:Explanation rdfs:comment "A user-centered, actionable explanation, designed for a specific user, explaining the root cause of a specific state." .
+sense:explains rdfs:comment "The state, which is explained by an explanation." .
+sense:considersUserType rdfs:comment "The technicality level, which is considered by an explanation." .
+sense:designedFor rdfs:comment "The user, for whom the explanation is designed." .
+sense:considersViewAccessRights rdfs:comment "Which view access rights are considered in the explanation." .
+sense:suggests rdfs:comment "Mitigation options, which are suggested by an explanation based on a user control access rights." .
+
+sense:MitigationPlan rdfs:comment "A mitigation plan for a type of state." .
+sense:containsMitigationOption rdfs:comment "a list of mitigation options, contained in the mitigation plan." .
+
+sense:MitigationOption rdfs:comment "A mitigation option for a state type." .
+sense:requiresControlAccessRights rdfs:comment "control Access rights required to be able to perform this mitigation option." .
+
+
+###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi

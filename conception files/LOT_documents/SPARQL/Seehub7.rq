@@ -1,0 +1,9 @@
+PREFIX s: <http://w3id.org/explainability/sense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+select * where { 
+	?e a s:Event .
+    ?o sosa:hasResult ?e .
+    ?o sosa:phenomenonTime ?time .
+    FILTER((?time > "2023-04-01"^^xsd:dateTime) && (?time < "2023-04-02"^^xsd:dateTime))
+} 

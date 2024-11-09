@@ -1,0 +1,10 @@
+PREFIX s: <http://w3id.org/explainability/sense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX : <http://example.org/seehub#>
+select *
+where { 
+    ?p a sosa:Platform .
+    ?p sosa:hosts ?s .
+    ?s s:hasSensorType ?t .
+    
+} 

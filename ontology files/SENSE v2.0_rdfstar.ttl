@@ -1,0 +1,3 @@
+@prefix sense: <http://w3id.org/explainability/sense#> .
+
+<< sense:State sense:causallyRelated sense:State >> sense:hasCausalSource sense:StateTypeCausality .

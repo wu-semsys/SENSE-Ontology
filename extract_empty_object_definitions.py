@@ -1,32 +1,65 @@
 from rdflib import Graph, Namespace
 from rdflib.namespace import RDF, RDFS, OWL
 
-def extract_classes_and_object_properties(ttl_file):
-    # Load the Turtle file into an RDF graph
+def check_missing_rdfs_comments(ttl_file):
     g = Graph()
     g.parse(ttl_file, format='turtle')
 
-    # List to store owl:class instances
-    objects = []
+    namespaces = {
+        'rdf': RDF,
+        'rdfs': RDFS,
+        'owl': OWL
+    }
+    for prefix, namespace in g.namespaces():
+        namespaces[prefix] = namespace
 
-    # Iterate over each triple in the graph
-    for subj, pred, obj in g:
-        # Check if the triple represents a class
-        if pred == RDF.type:
-            objects.append(subj)
+    # Lists to store entities missing rdfs:comment
+    missing_comments = []
 
-    # Convert URIs to QNames using defined namespace prefixes
-    objects = [g.qname(uri) for uri in objects]
+    # Query for all classes and properties
+    query = """
+    SELECT ?entity ?type
+    WHERE {
+        {
+            ?entity a owl:Class .
+            BIND("Class" AS ?type)
+        }
+        UNION
+        {
+            ?entity a owl:ObjectProperty .
+            BIND("ObjectProperty" AS ?type)
+        }
+        UNION
+        {
+            ?entity a owl:DatatypeProperty .
+            BIND("DatatypeProperty" AS ?type)
+        }
+    }
+    """
 
-    return sorted(objects)
+    results = g.query(query, initNs=namespaces)
 
-# Example usage
+    for row in results:
+        entity = row.entity
+        entity_type = row.type
+
+        # Check if rdfs:comment exists for the entity
+        comments = list(g.objects(entity, RDFS.comment))
+
+        if not comments:
+            # Get QName for readability
+            qname = g.qname(entity)
+            missing_comments.append((qname, entity_type))
+
+    # Report entities missing rdfs:comment
+    if missing_comments:
+        print("Entities missing rdfs:comment:")
+        for entity_qname, entity_type in missing_comments:
+            if entity_qname.startswith("sense"):
+                print(f" - [{entity_type}] {entity_qname}")
+    else:
+        print("All classes and properties have rdfs:comment annotations.")
+
 if __name__ == "__main__":
-    ttl_file_root = "SENSE v1.0.ttl"  # Replace with the path to your Turtle file
-    objects = extract_classes_and_object_properties(ttl_file_root)
-
-    print("#empty objects:")
-    for uri in objects:
-        print(uri + " rdfs:comment \"\" .")
-
-    
+    ttl_file_root = "./ontology files/SENSE v2.0.ttl"  # Replace with the path to your Turtle file
+    check_missing_rdfs_comments(ttl_file_root)

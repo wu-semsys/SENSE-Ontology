@@ -2,20 +2,24 @@
 
 The SENSE Ontology is created as part of the SENSE project. It is located at the following namespace: http://w3id.org/explainability/sense#
 
-
-- **SENSE v1.0.drawio**: Visual notation of the SENSE Ontology
-- **SENSE v1.0.drawio.xml**: XML Export of the drawio file to be uploaded to CHOWLK converter
-- **SENSE v1.0.ttl**: Turtle file of the SENSE Ontology as converted by the CHOWLK converter https://catalogue.fair-impact.eu/resources/chowlk
-- **SENSEComments.ttl**: Turtle file, which contains additional metadata information, which is not included in the CHOWLK.converted file. This metadata has to be updated manually, if new classes and properties are added to the drawio concept of the Ontology.
-- **ISSUES.md**: currently a local, manual list of issues to address in the future.
+The ontology was developed using the LOT methodology. The initial version was conceptualised using chowlk, and then extended with additionaly functionalities externally.
+- **conception files**: contains files, used for the development of the ontology - LOT documents and chowlk conception files for each ontology version.
+- **ontology files**: contains turtle files, which are used to create the current ontology.
+   - **SENSE vXY_chowlk.ttl**: Turtle file of the SENSE Ontology as converted by the CHOWLK converter https://catalogue.fair-impact.eu/resources/chowlk
+   - **SENSE vXY_inverses.ttl**: inverse relations, added additionally to the chowlk version to enable SHACL shapes for data validataion.
+   - **SENSE vXY_oopsfixes.ttl**: changes to the ontology based on OOPS evaluation.
+   - **SENSE vXY_rdfstar.ttl**: rdf-star additions to the ontology, which are not supported by chowlk yet.
+   - **SENSEComments.ttl**: Turtle file, which contains additional metadata information, which is not included in the CHOWLK.converted file. This metadata has to be updated manually, if new classes and properties are added to the drawio concept of the Ontology.
 
 ## Workflow
 To enforce any changes to the SENSE Ontology, the following steps should be executed:
-1. Export drawio of the Ontology as an XML File ``SENSE v1.0.drawio.xml`` and PNG
+1. Export drawio of the Ontology as an XML File ``SENSE v2.0_chowlk.xml`` and PNG
 2. Convert the XML file to ttl using the chowlk converter
-3. add missing descriptions of classes and properties in the ``SENSEComments.ttl`` file (to check which objects miss a description, execute ``extract_empty_object_definitions.py``)
-4. if needed, update Abstract, Introduction, Description, References below to be added to the widoco page of the ontology. 
-5. Follow these steps to generate and deploy the documentation for the SENSE Ontology:
+3. Combine the ``SENSE v1.0.ttl``, ``SENSEComments.ttl``, ``SENSE v2.0_chowlk.ttl``, ``SENSE v2.0_inverses.ttl``, ``SENSE v2.0_oopsfixes.ttl`` using the ``ontology_combiner.py`` script
+4. (Current solution to include rdf*) upload/import the output of ``ontology_combiner.py`` and the ``SENSE v2.0_rdfstar.ttl`` into an empty graphdb repository, and then download/export the graph in ttl format
+5. add missing descriptions of classes and properties in the ``SENSEComments.ttl`` file (to check which objects miss a description, execute ``extract_empty_object_definitions.py``)
+6. if needed, update Abstract, Introduction, Description, References below to be added to the widoco page of the ontology. 
+7. Follow these steps to generate and deploy the documentation for the SENSE Ontology:
 
 
    1. **Clone the SENSE Ontology Repository**
@@ -30,11 +34,12 @@ To enforce any changes to the SENSE Ontology, the following steps should be exec
         ```
 
    2. **Combine SENSE and SENSEComments TTL Files**
-      - Run the `ontology_combiner.py` script to merge the SENSE ontology and SENSEComments files into a single TTL file:
+      - Run the `ontology_combiner.py` script to merge the ``SENSEComments.ttl``, ``SENSE v2.0_chowlk.ttl``, ``SENSE v2.0_inverses.ttl``, ``SENSE v2.0_oopsfixes.ttl`` files into a single TTL file:
         ```bash
         python ontology_combiner.py
         ```
-      - The output will be a combined TTL file that includes both SENSE and SENSEComments data.
+      - The output will be a combined TTL file that includes ``SENSEComments.ttl``, ``SENSE v2.0_chowlk.ttl``, ``SENSE v2.0_inverses.ttl``, ``SENSE v2.0_oopsfixes.ttl`` data.
+      - manually add the rdf-star file to the final file, as this in not yet supported by the library.
 
    3. **Download the Latest WIDOCO JAR**
       - Visit the [WIDOCO releases page](https://github.com/dgarijo/WIDOCO/releases).

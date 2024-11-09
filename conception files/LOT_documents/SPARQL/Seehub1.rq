@@ -1,0 +1,4 @@
+PREFIX s: <http://w3id.org/explainability/sense#>
+select * where { 
+	?e a s:EventType .
+} limit 100 

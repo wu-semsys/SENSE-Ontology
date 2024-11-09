@@ -1,0 +1,338 @@
+@prefix : <http://w3id.org/explainability/sense#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ssn: <https://www.w3.org/ns/ssn/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix sense: <http://w3id.org/explainability/sense#> .
+@base <http://w3id.org/explainability/sense#> .
+
+<http://w3id.org/explainability/sense#> rdf:type owl:Ontology ;
+                                         dc:creator "Fajar J. Ekaputra" ,
+                                                    "Katrin Schreiberhuber" ;
+                                         dc:title "SENSE Ontology" ;
+                                         owl:versionInfo "1.0" ;
+                                         mod:createdWith <https://chowlk.linkeddata.es/> .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2002/07/owl#versionInfo
+owl:versionInfo rdf:type owl:AnnotationProperty .
+
+
+###  https://w3id.org/mod#createdWith
+mod:createdWith rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://w3id.org/explainability/sense#associatedSensorType
+sense:associatedSensorType rdf:type owl:ObjectProperty ;
+                           rdfs:domain sense:ResultType ;
+                           rdfs:range sense:SensorType ;
+                           rdfs:label "associated sensor type" .
+
+
+###  http://w3id.org/explainability/sense#causallyRelated
+sense:causallyRelated rdf:type owl:ObjectProperty ;
+                      rdfs:label "causally related" .
+
+
+###  http://w3id.org/explainability/sense#cause
+sense:cause rdf:type owl:ObjectProperty ;
+            rdfs:domain sense:StateTypeCausality ;
+            rdfs:range sense:StateType ;
+            rdfs:label "cause" .
+
+
+###  http://w3id.org/explainability/sense#causes
+sense:causes rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf sense:causallyRelated ;
+             rdfs:label "causes" .
+
+
+###  http://w3id.org/explainability/sense#effect
+sense:effect rdf:type owl:ObjectProperty ;
+             rdfs:domain sense:StateTypeCausality ;
+             rdfs:range sense:StateType ;
+             rdfs:label "effect" .
+
+
+###  http://w3id.org/explainability/sense#enables
+sense:enables rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf sense:causallyRelated ;
+              rdfs:label "enables" .
+
+
+###  http://w3id.org/explainability/sense#hasCausalRelation
+sense:hasCausalRelation rdf:type owl:ObjectProperty ;
+                        rdfs:domain sense:StateTypeCausality ;
+                        rdfs:range sense:CausalRelation ;
+                        rdfs:label "has causal relation" .
+
+
+###  http://w3id.org/explainability/sense#hasEndEvent
+sense:hasEndEvent rdf:type owl:ObjectProperty ;
+                  rdfs:domain sense:State ;
+                  rdfs:range sense:Event ;
+                  rdfs:label "has end event" .
+
+
+###  http://w3id.org/explainability/sense#hasEndEventType
+sense:hasEndEventType rdf:type owl:ObjectProperty ;
+                      rdfs:domain sense:StateType ;
+                      rdfs:range sense:EventType ;
+                      rdfs:label "has end event type" .
+
+
+###  http://w3id.org/explainability/sense#hasEventType
+sense:hasEventType rdf:type owl:ObjectProperty ;
+                   rdfs:domain sense:Event ;
+                   rdfs:range sense:EventType ;
+                   rdfs:label "has event type" .
+
+
+###  http://w3id.org/explainability/sense#hasSensorType
+sense:hasSensorType rdf:type owl:ObjectProperty ;
+                    rdfs:domain sosa:Sensor ;
+                    rdfs:range sense:SensorType ;
+                    rdfs:label "has sensor type" .
+
+
+###  http://w3id.org/explainability/sense#hasStartEvent
+sense:hasStartEvent rdf:type owl:ObjectProperty ;
+                    rdfs:domain sense:State ;
+                    rdfs:range sense:Event ;
+                    rdfs:label "has start event" .
+
+
+###  http://w3id.org/explainability/sense#hasStartEventType
+sense:hasStartEventType rdf:type owl:ObjectProperty ;
+                        rdfs:domain sense:StateType ;
+                        rdfs:range sense:EventType ;
+                        rdfs:label "has start event type" .
+
+
+###  http://w3id.org/explainability/sense#hasStateType
+sense:hasStateType rdf:type owl:ObjectProperty ;
+                   rdfs:domain sense:State ;
+                   rdfs:range sense:StateType ;
+                   rdfs:label "has state type" .
+
+
+###  http://w3id.org/explainability/sense#hasTemporalRelation
+sense:hasTemporalRelation rdf:type owl:ObjectProperty ;
+                          rdfs:domain sense:StateTypeCausality ;
+                          rdfs:range sense:TemporalRelation ;
+                          rdfs:label "has temporal relation" .
+
+
+###  http://w3id.org/explainability/sense#hasTopologicalRelation
+sense:hasTopologicalRelation rdf:type owl:ObjectProperty ;
+                             rdfs:domain sense:StateTypeCausality ;
+                             rdfs:range sense:TopologicalRelation ;
+                             rdfs:label "has topological relation" .
+
+
+###  http://w3id.org/explainability/sense#observes
+sense:observes rdf:type owl:ObjectProperty ;
+               rdfs:domain sosa:SensorType ;
+               rdfs:range sosa:ObservableProperty ;
+               rdfs:label "observes" .
+
+
+###  http://w3id.org/explainability/sense#prevents
+sense:prevents rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf sense:causallyRelated ;
+               rdfs:label "prevents" .
+
+
+###  http://www.w3.org/ns/sosa/hasResult
+sosa:hasResult rdf:type owl:ObjectProperty ;
+               rdfs:domain sosa:Observation ;
+               rdfs:range sosa:Result ;
+               rdfs:label "has result" .
+
+
+###  http://www.w3.org/ns/sosa/hosts
+sosa:hosts rdf:type owl:ObjectProperty ;
+           rdfs:label "hosts" .
+
+
+###  http://www.w3.org/ns/sosa/madeObservation
+sosa:madeObservation rdf:type owl:ObjectProperty ;
+                     rdfs:domain sosa:Sensor ;
+                     rdfs:range sosa:Observation ;
+                     rdfs:label "made observation" .
+
+
+###  http://www.w3.org/ns/sosa/observedProperty
+sosa:observedProperty rdf:type owl:ObjectProperty ;
+                      rdfs:domain sosa:Observation ;
+                      rdfs:range sosa:ObservableProperty ;
+                      rdfs:label "observed property" .
+
+
+###  http://www.w3.org/ns/sosa/usedProcedure
+sosa:usedProcedure rdf:type owl:ObjectProperty ;
+                   rdfs:domain sosa:Observation ;
+                   rdfs:range sosa:Procedure ;
+                   rdfs:label "used procedure" .
+
+
+###  https://www.w3.org/ns/ssn/implements
+ssn:implements rdf:type owl:ObjectProperty ;
+               rdfs:domain sosa:Sensor ;
+               rdfs:range sosa:Procedure ;
+               rdfs:label "implements" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://w3id.org/explainability/sense#algorithm
+sense:algorithm rdf:type owl:DatatypeProperty ;
+                rdfs:label "algorithm" .
+
+
+###  http://w3id.org/explainability/sense#detectsEventType
+sense:detectsEventType rdf:type owl:DatatypeProperty ;
+                       rdfs:label "detects EventType" .
+
+
+###  http://w3id.org/explainability/sense#timeSeriesDataRef
+sense:timeSeriesDataRef rdf:type owl:DatatypeProperty ;
+                        rdfs:label "time series data ref" .
+
+
+###  http://www.w3.org/ns/sosa/ExplanationTriggerState
+sosa:ExplanationTriggerState rdf:type owl:DatatypeProperty ;
+                             rdfs:range xsd:boolean ;
+                             rdfs:label "Explanation Triggerstate" .
+
+
+###  http://www.w3.org/ns/sosa/phenomenonTime
+sosa:phenomenonTime rdf:type owl:DatatypeProperty ;
+                    rdfs:label "phenomenon time" .
+
+
+###  http://www.w3.org/ns/sosa/resultTime
+sosa:resultTime rdf:type owl:DatatypeProperty ;
+                rdfs:label "result time" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://w3id.org/explainability/sense#CausalRelation
+sense:CausalRelation rdf:type owl:Class ;
+                     rdfs:label "causal Relation" .
+
+
+###  http://w3id.org/explainability/sense#Event
+sense:Event rdf:type owl:Class ;
+            rdfs:subClassOf sosa:Result ;
+            owl:disjointWith sense:State ;
+            rdfs:label "Event" .
+
+
+###  http://w3id.org/explainability/sense#EventDetection
+sense:EventDetection rdf:type owl:Class ;
+                     rdfs:subClassOf sosa:Procedure ;
+                     rdfs:label "Event Detection" .
+
+
+###  http://w3id.org/explainability/sense#EventType
+sense:EventType rdf:type owl:Class ;
+                rdfs:label "Event Type" .
+
+
+###  http://w3id.org/explainability/sense#ResultType
+sense:ResultType rdf:type owl:Class ;
+                 rdfs:label "Result Type" .
+
+
+###  http://w3id.org/explainability/sense#SensorType
+sense:SensorType rdf:type owl:Class ;
+                 rdfs:label "Sensor Type" .
+
+
+###  http://w3id.org/explainability/sense#State
+sense:State rdf:type owl:Class ;
+            rdfs:subClassOf sosa:Result ;
+            rdfs:label "State" .
+
+
+###  http://w3id.org/explainability/sense#StateType
+sense:StateType rdf:type owl:Class ;
+                rdfs:label "State Type" .
+
+
+###  http://w3id.org/explainability/sense#StateTypeCausality
+sense:StateTypeCausality rdf:type owl:Class ;
+                         rdfs:label "State Type Causality" .
+
+
+###  http://w3id.org/explainability/sense#TemporalRelation
+sense:TemporalRelation rdf:type owl:Class ;
+                       rdfs:label "temporal Relation" .
+
+
+###  http://w3id.org/explainability/sense#TopologicalRelation
+sense:TopologicalRelation rdf:type owl:Class ;
+                          rdfs:label "topological Relation" .
+
+
+###  http://www.w3.org/ns/sosa/ObservableProperty
+sosa:ObservableProperty rdf:type owl:Class ;
+                        rdfs:label "Observable Property" .
+
+
+###  http://www.w3.org/ns/sosa/Observation
+sosa:Observation rdf:type owl:Class ;
+                 rdfs:label "Observation" .
+
+
+###  http://www.w3.org/ns/sosa/Platform
+sosa:Platform rdf:type owl:Class ;
+              rdfs:label "Platform" .
+
+
+###  http://www.w3.org/ns/sosa/Procedure
+sosa:Procedure rdf:type owl:Class ;
+               rdfs:label "Procedure" .
+
+
+###  http://www.w3.org/ns/sosa/Result
+sosa:Result rdf:type owl:Class ;
+            rdfs:label "Result" .
+
+
+###  http://www.w3.org/ns/sosa/Sensor
+sosa:Sensor rdf:type owl:Class ;
+            rdfs:label "Sensor" .
+
+
+###  http://www.w3.org/ns/sosa/SensorType
+sosa:SensorType rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi

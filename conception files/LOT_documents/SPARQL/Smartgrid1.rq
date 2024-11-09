@@ -1,0 +1,18 @@
+PREFIX s: <http://w3id.org/explainability/sense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX : <http://example.org/seehub#>
+select 
+distinct ?neighbor
+where { 
+    VALUES ?p { :AllEVChargers1 }
+    VALUES ?i { 1 2 3 }
+    ?parent sosa:hosts ?p .
+    OPTIONAL{?p sosa:hosts ?child .
+        ?child a sosa:Platform .}
+    OPTIONAL{
+        ?parent a sosa:Platform .
+    	?parent sosa:hosts ?sibling .
+    	?sibling a sosa:Platform .
+    	}
+    BIND (if(?i=1, ?parent, if(?i=2, ?child, ?sibling)) AS ?neighbor)
+} 

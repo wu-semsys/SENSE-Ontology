@@ -1,25 +1,30 @@
 import rdflib
-import copy
+import os
 
-def combine_ontologies(ontology1_path, ontology2_path, output_path):
+def combine_ontologies(ontology1_path, ontology2_paths, output_path):
     g1 = rdflib.Graph()
     g1.parse(ontology1_path, format=rdflib.util.guess_format(ontology1_path))
 
-    g1_copy = copy.deepcopy(g1)
+    combined_graph = g1
 
-    g2 = rdflib.Graph()
-    g2.parse(ontology2_path, format=rdflib.util.guess_format(ontology2_path))
-
-    g2_copy = copy.deepcopy(g2)
-
-    combined_graph = g1_copy + g2_copy
+    for ontology_path in ontology2_paths:
+        g2 = rdflib.Graph()
+        g2.parse(ontology_path, format=rdflib.util.guess_format(ontology_path))
+        combined_graph += g2 
 
     combined_graph.serialize(destination=output_path, format='turtle')
     print(f"Combined ontology saved to {output_path}")
 
+base_dir = os.path.dirname(os.path.abspath(__file__))
+ontology_dir = os.path.join(base_dir, 'ontology files')
 
-ontology1_path = 'SENSE v1.0.ttl'
-ontology2_path = 'SENSEComments.ttl'
-output_path = 'sense.ttl'
+ontology1_path = os.path.join(ontology_dir, 'SENSE v2.0_chowlk.ttl')
+ontology2_paths = [
+    os.path.join(ontology_dir, 'SENSEComments.ttl'),
+    os.path.join(ontology_dir, 'SENSE v2.0_inverses.ttl'),
+    os.path.join(ontology_dir, 'SENSE v2.0_oopsfixes.ttl')
+]
 
-combine_ontologies(ontology1_path, ontology2_path, output_path)
+output_path = os.path.join(ontology_dir, 'SENSE v2.0.ttl')
+
+combine_ontologies(ontology1_path, ontology2_paths, output_path)

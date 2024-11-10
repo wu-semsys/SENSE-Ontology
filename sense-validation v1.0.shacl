@@ -18,7 +18,7 @@ sense:SensorShape
         sh:path sosa:isHostedBy ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-        sh:class sosa:Platform ;
+        sh:class sense:PlatformOfInterest ;
         sh:message "Each Sensor must be hosted by a platform." ;
     ] ;
 .

@@ -1,0 +1,9 @@
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX sense: <http://w3id.org/explainability/sense#>
+
+SELECT ?blinds
+VALUES ?motor {:motorM}
+WHERE {
+    ?motor (sosa:hosts)* ?blinds .
+    ?blinds sense:hasPlatformType sense:WindowBlinds .
+}

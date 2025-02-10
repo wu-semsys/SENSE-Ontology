@@ -1,0 +1,7 @@
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+select *
+where { 
+    ?s a sosa:Sensor .
+    ?a qudt:hasUnit ?unit .
+}

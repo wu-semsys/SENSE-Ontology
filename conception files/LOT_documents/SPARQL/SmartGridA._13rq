@@ -1,9 +1,9 @@
 PREFIX s: <http://w3id.org/explainability/sense#>
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
-select 
-*
+PREFIX : <http://example.org/seehub#>
+select *
 where { 
-    VALUES ?s { s:DemandEnvelopeViolation_State_720ccb78-79bc-49a5-8406-d8298b076742 }
+    VALUES ?s { :DemandEnvelopeViolation_State_c0301bc8-7581-4623-8a60-4f04cd7198c3 }
     ?o sosa:hasResult ?s .
     ?sensor sosa:madeObservation ?o .
     ?platform sosa:hosts ?sensor

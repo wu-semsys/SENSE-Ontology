@@ -1,0 +1,8 @@
+PREFIX s: <http://w3id.org/explainability/sense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <http://example.org/seehub#>
+select (COUNT(*) AS ?count) where { 
+	?e a s:Event .
+    ?e s:hasEventType :DemandEnvelopeViolated_Event .
+} 

@@ -1,0 +1,8 @@
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX sense: <http://w3id.org/explainability/sense#>
+
+SELECT ?host
+VALUES ?ahu {:ahuX}
+WHERE {
+    ?host sosa:hosts ?ahu .
+}

@@ -3,6 +3,6 @@ PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX : <http://example.org/seehub#>
 select * where { 
 	?e a s:EventDetection .
-    ?e s:detectsEventType :DemandEnvelopeViolated_Event .
-    ?e s:hasSTLFormula ?f .
+    :DemandEnvelopeViolated_Event s:detectedBy ?e.
+    ?e :definition ?f .
 } limit 100 

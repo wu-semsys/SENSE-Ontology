@@ -2,6 +2,8 @@
 @prefix sense: <http://w3id.org/explainability/sense#> .
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
 
 # Define the shape for the Sensor class
 sense:SensorShape
@@ -94,5 +96,28 @@ sense:PlatformOfInterestShape
         sh:maxCount 1 ;
         sh:node sense:PlatformType ;
         sh:message "A Platform of Interest must have a Platform Type that is a subclass of Platform Type."
+    ] ;
+.
+
+sense:StateTypeCausalityShape
+    a sh:NodeShape ;
+    sh:targetClass sense:StateTypeCausality ;
+    sh:property [
+         sh:path sense:topologicalRelation ;
+         sh:datatype xsd:string ;
+         sh:in ( "samePlatform" "parentPlatform" "siblingPlatform" ) ;
+         sh:message "The topological relation must be one of: samePlatform, parentPlatform, or siblingPlatform." ;
+    ] ;
+    sh:property [
+         sh:path sense:temporalRelation ;
+         sh:datatype xsd:string ;
+         sh:in ( "before" "overlaps" "contains" "identity" ) ;
+         sh:message "The temporal relation must be one of: before, overlaps, contains, or identity." ;
+    ] ;
+    sh:property [
+         sh:path sense:causalRelation ;
+         sh:datatype xsd:string ;
+         sh:in ( "causes" "enables" "prevents" ) ;
+         sh:message "The causal relation must be one of: cause, enable, or prevent." ;
     ] ;
 .

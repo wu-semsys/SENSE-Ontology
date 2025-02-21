@@ -118,6 +118,6 @@ sense:StateTypeCausalityShape
          sh:path sense:causalRelation ;
          sh:datatype xsd:string ;
          sh:in ( "causes" "enables" "prevents" ) ;
-         sh:message "The causal relation must be one of: cause, enable, or prevent." ;
+         sh:message "The causal relation must be one of: causes, enables, or prevents." ;
     ] ;
 .

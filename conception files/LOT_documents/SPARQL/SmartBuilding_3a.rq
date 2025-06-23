@@ -1,0 +1,9 @@
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX sense: <http://w3id.org/explainability/sense#>
+
+SELECT ?triggerState 
+VALUES ?s { s:DemandEnvelopeViolation_State}
+
+WHERE  {
+    ?s sense:isTriggerState ?triggerState .
+    }

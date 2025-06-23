@@ -1,0 +1,10 @@
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX sense: <http://w3id.org/explainability/sense#>
+PREFIX : <http://example.org/seehub#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select * 
+values ?instance {:EVCharger1}
+where { 
+    ?instance a ?class .
+} limit 100 
+

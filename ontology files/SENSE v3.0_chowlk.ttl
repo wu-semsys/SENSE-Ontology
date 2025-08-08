@@ -1,0 +1,308 @@
+@prefix sense: <http://w3id.org/explainability/sense#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix mod: <https://w3id.org/mod#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+dc:creator a owl:AnnotationProperty .
+
+dc:title a owl:AnnotationProperty .
+
+sense: a owl:Ontology ;
+    dc:creator "Fajar J. Ekaputra",
+        "Katrin Schreiberhuber" ;
+    dc:title "SENSE Ontology" ;
+    owl:versionInfo "3.0" ;
+    mod:createdWith <https://chowlk.linkeddata.es/> .
+
+owl:versionInfo a owl:AnnotationProperty .
+
+sense:isOfType a owl:ObjectProperty ;
+    rdfs:label "is of type" ;
+    rdfs:domain sense:Event,
+        sense:Platform,
+        sense:State ;
+    rdfs:range sense:EventType,
+        sense:PlatformType,
+        sense:StateType .
+
+# Topology Knowledge Module
+sense:associatedPlatformType a owl:ObjectProperty ;
+    rdfs:label "associated platform type" ;
+    rdfs:domain sense:EventType ;
+    rdfs:range sense:PlatformType .
+
+sense:PlatformType a owl:Class ;
+    rdfs:label "Platform Type" .
+
+sense:dataSource a owl:DatatypeProperty ;
+    rdfs:label "data source" .
+
+sense:hasProperty a owl:ObjectProperty ;
+    rdfs:label "has property" ;
+    rdfs:domain sense:PlatformType ;
+    rdfs:range sense:ObservableProperty .
+
+sense:hasUnit a owl:DatatypeProperty ;
+    rdfs:label "has unit" .
+
+sense:hosts a owl:ObjectProperty ;
+    rdfs:label "hosts" ;
+    rdfs:domain sense:Platform ;
+    rdfs:range sense:Platform,
+        sense:Sensor .
+
+sense:linkedToSensor a owl:ObjectProperty ;
+    rdfs:label "linked to sensor" ;
+    rdfs:domain sense:VirtualSensor ;
+    rdfs:range sense:Sensor .
+
+sense:observes a owl:ObjectProperty ;
+    rdfs:label "observes" ;
+    rdfs:domain sense:Sensor .
+
+sense:origin a owl:DatatypeProperty ;
+    rdfs:label "origin" .
+
+sense:VirtualSensor a owl:Class ;
+    rdfs:label "Virtual Sensor" ;
+    rdfs:subClassOf sense:Sensor .
+
+sense:Platform a owl:Class ;
+    rdfs:label "Platform" .
+
+sense:Sensor a owl:Class ;
+    rdfs:label "Sensor" .
+
+sense:ObservableProperty a owl:Class ;
+    rdfs:label "Observable Property" .
+
+# Observation Knowledge Module
+sense:madeObservation a owl:ObjectProperty ;
+    rdfs:label "made observation" ;
+    rdfs:domain sense:Sensor ;
+    rdfs:range sense:Observation .
+
+sense:Observation a owl:Class ;
+    rdfs:label "Observation" .
+
+sense:associatedProperty a owl:ObjectProperty ;
+    rdfs:label "associated property" ;
+    rdfs:domain sense:EventType ;
+    rdfs:range sense:ObservableProperty .
+
+sense:bindsToLiteral a owl:DatatypeProperty ;
+    rdfs:label "binds to literal" .
+    
+sense:bindsToSensor a owl:ObjectProperty ;
+    rdfs:label "binds to sensor" ;
+    rdfs:domain sense:ParameterBinding ;
+    rdfs:range sense:Sensor .
+
+sense:definition a owl:DatatypeProperty ;
+    rdfs:label "definition" .
+
+sense:eventTime a owl:DatatypeProperty ;
+    rdfs:label "event time" .
+
+sense:detectedEvent a owl:ObjectProperty ;
+    rdfs:label "detected event" ;
+    rdfs:domain sense:Observation ;
+    rdfs:range sense:Event .
+
+sense:detectsEventType a owl:ObjectProperty ;
+    rdfs:label "detects event type" ;
+    rdfs:domain sense:EventDetection ;
+    rdfs:range sense:EventType .
+
+sense:hasFeatureOfInterest a owl:ObjectProperty ;
+    rdfs:label "has feature of interest" ;
+    rdfs:domain sense:Observation ;
+    rdfs:range sense:Platform .
+
+sense:hasParameterBinding a owl:ObjectProperty ;
+    rdfs:label "has parameter binding" ;
+    rdfs:domain sense:EventDetection ;
+    rdfs:range sense:ParameterBinding .
+
+sense:method a owl:DatatypeProperty ;
+    rdfs:label "method" .
+
+sense:observedProperty a owl:ObjectProperty ;
+    rdfs:label "observed property" ;
+    rdfs:domain sense:Observation ;
+    rdfs:range sense:ObservableProperty .
+
+sense:parameterName a owl:DatatypeProperty ;
+    rdfs:label "parameter name" .
+
+sense:usedProcedure a owl:ObjectProperty ;
+    rdfs:label "used procedure" ;
+    rdfs:domain sense:Observation ;
+    rdfs:range sense:EventDetection .
+
+sense:ParameterBinding a owl:Class ;
+    rdfs:label "Parameter Binding" .
+
+sense:EventDetection a owl:Class ;
+    rdfs:label "Event Detection" .
+
+sense:Event a owl:Class ;
+    rdfs:label "Event" .
+
+sense:EventType a owl:Class ;
+    rdfs:label "Event Type" .
+
+# Causal Knowledge Module
+
+sense:causalRelation a owl:DatatypeProperty ;
+    rdfs:label "causal relation" .
+
+sense:temporalRelation a owl:DatatypeProperty ;
+    rdfs:label "temporal relation" .
+
+sense:topologicalRelation a owl:DatatypeProperty ;
+    rdfs:label "topological relation" .
+
+sense:cause a owl:ObjectProperty ;
+    rdfs:label "cause" ;
+    rdfs:domain sense:StateCausality,
+        sense:StateTypeCausality ;
+    rdfs:range sense:State,
+        sense:StateType .
+
+sense:effect a owl:ObjectProperty ;
+    rdfs:label "effect" ;
+    rdfs:domain sense:StateCausality,
+        sense:StateTypeCausality ;
+    rdfs:range sense:State,
+        sense:StateType .
+
+sense:hasCausalSource a owl:ObjectProperty ;
+    rdfs:label "has causal source" ;
+    rdfs:domain sense:StateCausality ;
+    rdfs:range sense:StateTypeCausality .
+
+sense:hasEndEvent a owl:ObjectProperty ;
+    rdfs:label "has end event" ;
+    rdfs:domain sense:State ;
+    rdfs:range sense:Event .
+
+sense:hasEndEventType a owl:ObjectProperty ;
+    rdfs:label "has end event type" ;
+    rdfs:domain sense:StateType ;
+    rdfs:range sense:EventType .
+
+sense:hasMitigationPlan a owl:ObjectProperty ;
+    rdfs:label "has mitigation plan" ;
+    rdfs:domain sense:StateType ;
+    rdfs:range sense:MitigationPlan .
+
+sense:hasStartEvent a owl:ObjectProperty ;
+    rdfs:label "has start event" ;
+    rdfs:domain sense:State ;
+    rdfs:range sense:Event .
+
+sense:hasStartEventType a owl:ObjectProperty ;
+    rdfs:label "has start event type" ;
+    rdfs:domain sense:StateType ;
+    rdfs:range sense:EventType .
+
+sense:isTriggerStateType a owl:DatatypeProperty ;
+    rdfs:label "is trigger state type" .
+
+sense:State a owl:Class ;
+    rdfs:label "State" .
+
+sense:StateType a owl:Class ;
+    rdfs:label "State Type" .
+
+sense:StateCausality a owl:Class ;
+    rdfs:label "State Causality" .
+
+sense:StateTypeCausality a owl:Class ;
+    rdfs:label "State Type Causality" .
+
+# User-Context Module
+sense:allowsControlAccessTo a owl:ObjectProperty ;
+    rdfs:label "allows control access to" ;
+    rdfs:domain sense:AccessRight ;
+    rdfs:range sense:Platform .
+
+sense:allowsViewAccessTo a owl:ObjectProperty ;
+    rdfs:label "allows view access to" ;
+    rdfs:domain sense:AccessRight ;
+    rdfs:range sense:Platform .
+
+sense:containsAccessRights a owl:ObjectProperty ;
+    rdfs:label "contains access rights" ;
+    rdfs:domain sense:UserRole ;
+    rdfs:range sense:AccessRight .
+
+sense:hasUserRole a owl:ObjectProperty ;
+    rdfs:label "has user role" ;
+    rdfs:domain sense:User ;
+    rdfs:range sense:UserRole .
+
+sense:hasUserType a owl:ObjectProperty ;
+    rdfs:label "has user type" ;
+    rdfs:domain sense:User ;
+    rdfs:range sense:UserType .
+
+sense:interestedIn a owl:ObjectProperty ;
+    rdfs:label "interested in" ;
+    rdfs:domain sense:User ;
+    rdfs:range sense:StateType .
+
+sense:UserRole a owl:Class ;
+    rdfs:label "User Role" .
+
+sense:UserType a owl:Class ;
+    rdfs:label "User Type" .
+
+sense:User a owl:Class ;
+    rdfs:label "User" .
+
+sense:AccessRight a owl:Class ;
+    rdfs:label "Access Right" .
+
+# Explanation Module
+
+sense:considersAccessRights a owl:ObjectProperty ;
+    rdfs:label "considers access rights" ;
+    rdfs:domain sense:Explanation ;
+    rdfs:range sense:AccessRight .
+
+sense:considersUserType a owl:ObjectProperty ;
+    rdfs:label "considers user type" ;
+    rdfs:domain sense:Explanation ;
+    rdfs:range sense:UserType .
+
+sense:containsMitigationOption a owl:ObjectProperty ;
+    rdfs:label "contains mitigation option" ;
+    rdfs:domain sense:MitigationPlan ;
+    rdfs:range sense:MitigationOption .
+
+sense:designedFor a owl:ObjectProperty ;
+    rdfs:label "designed for" ;
+    rdfs:domain sense:Explanation ;
+    rdfs:range sense:User .
+
+sense:explains a owl:ObjectProperty ;
+    rdfs:label "explains" ;
+    rdfs:domain sense:Explanation ;
+    rdfs:range sense:State .
+
+sense:suggests a owl:ObjectProperty ;
+    rdfs:label "suggests" ;
+    rdfs:domain sense:Explanation ;
+    rdfs:range sense:MitigationOption .
+
+sense:MitigationOption a owl:Class ;
+    rdfs:label "Mitigation Option" .
+
+sense:MitigationPlan a owl:Class ;
+    rdfs:label "Mitigation Plan" .
+
+sense:Explanation a owl:Class ;
+    rdfs:label "Explanation" .

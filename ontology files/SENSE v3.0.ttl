@@ -247,7 +247,8 @@ sense:interestedIn a owl:ObjectProperty ;
 sense:isHostedBy a owl:ObjectProperty ;
     rdfs:label "is hosted by" ;
     rdfs:comment "inverse relation of sense:hosts." ;
-    rdfs:domain sense:Sensor ;
+    rdfs:domain sense:Platform,
+                sense:Sensor ;
     rdfs:range sense:Platform ;
     owl:inverseOf sense:hosts .
 
@@ -356,6 +357,7 @@ sense:hasStartEventType a owl:ObjectProperty ;
 sense:hosts a owl:ObjectProperty ;
     rdfs:label "hosts" ;
     rdfs:comment "subclass of sosa:hosts -  relation from a Platform to an asset (System or Platform) hosted or mounted on it" ;
+    owl:inverseOf sense:isHostedBy .
     rdfs:domain sense:Platform ;
     rdfs:range sense:Platform,
         sense:Sensor .

@@ -22,7 +22,7 @@ sense:origin rdfs:domain sense:VirtualSensor ;
     rdfs:range xsd:string .
 sense:topologicalRelation rdfs:domain sense:StateTypeCausality ;
     rdfs:range xsd:string .
-sense:isTriggerState rdfs:domain sense:State ;
+sense:isTriggerStateType rdfs:domain sense:StateType ;
     rdfs:range xsd:boolean .
 sense:bindsToLiteral rdfs:domain sense:ParameterBinding ;
     rdfs:range xsd:string .
@@ -30,3 +30,7 @@ sense:temporalRelation rdfs:domain sense:StateTypeCausality ;
     rdfs:range xsd:string .
 sense:method rdfs:domain sense:EventDetection ;
     rdfs:range xsd:string .
+sense:hasUnit rdfs:domain sense:Sensor ;
+    rdfs:range xsd:string .
+sense:eventTime rdfs:domain sense:Event ;
+    rdfs:range xsd:dateTime .

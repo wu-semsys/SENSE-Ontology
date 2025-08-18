@@ -17,7 +17,7 @@ sense: a owl:Ontology ;
 
 owl:versionInfo a owl:AnnotationProperty .
 
-sense:isOfType a owl:ObjectProperty ;
+sense:isOfType a owl:ObjectProperty ; 
     rdfs:label "is of type" ;
     rdfs:domain sense:Event,
         sense:Platform,

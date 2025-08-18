@@ -168,7 +168,9 @@ sense:endsStateType a owl:ObjectProperty ;
 
 sense:eventTime a owl:DatatypeProperty ;
     rdfs:label "event time" ;
-    rdfs:comment "Timestamp of when the event is happening." .
+    rdfs:comment "Timestamp of when the event is happening." ;
+    rdfs:domain sense:Event ;
+    rdfs:range xsd:dateTime .
 
 sense:explains a owl:ObjectProperty ;
     rdfs:label "explains" ;
@@ -224,7 +226,9 @@ sense:hasStartEvent a owl:ObjectProperty ;
 
 sense:hasUnit a owl:DatatypeProperty ;
     rdfs:label "has unit" ;
-    rdfs:comment "subclass of qudt:Unit - This property relates a system of units with a unit of measure that is either:" .
+    rdfs:comment "subclass of qudt:Unit - This property relates a system of units with a unit of measure that is either:" ;
+    rdfs:domain sense:Sensor ;
+    rdfs:range xsd:string .
 
 sense:hasUserRole a owl:ObjectProperty ;
     rdfs:label "has user role" ;
@@ -295,7 +299,8 @@ sense:observedProperty a owl:ObjectProperty ;
 sense:observes a owl:ObjectProperty ;
     rdfs:label "observes" ;
     rdfs:comment "subclass of sosa:observes -  relation from a Sensor to a Property that it is capable of sensing" ;
-    rdfs:domain sense:Sensor .
+    rdfs:domain sense:Sensor ;
+    rdfs:range sense:ObservableProperty .
 
 sense:origin a owl:DatatypeProperty ;
     rdfs:label "origin" ;
@@ -357,7 +362,7 @@ sense:hasStartEventType a owl:ObjectProperty ;
 sense:hosts a owl:ObjectProperty ;
     rdfs:label "hosts" ;
     rdfs:comment "subclass of sosa:hosts -  relation from a Platform to an asset (System or Platform) hosted or mounted on it" ;
-    owl:inverseOf sense:isHostedBy .
+    owl:inverseOf sense:isHostedBy ;
     rdfs:domain sense:Platform ;
     rdfs:range sense:Platform,
         sense:Sensor .

@@ -1,0 +1,21 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sense: <http://w3id.org/explainability/sense#> .
+
+sense:isHostedBy a owl:ObjectProperty ;
+    rdfs:label "is hosted by" ;
+    rdfs:domain sense:Sensor ;
+    rdfs:range sense:Platform ;
+	owl:inverseOf sense:hosts .
+
+sense:startsStateType a owl:ObjectProperty ;
+	rdfs:label "starts state type" ;
+	rdfs:domain sense:EventType ;
+	rdfs:range sense:StateType ;
+	owl:inverseOf sense:hasStartEventType .
+	
+sense:endsStateType a owl:ObjectProperty ;
+	rdfs:label "ends state type" ;
+	rdfs:domain sense:EventType ;
+	rdfs:range sense:StateType ;
+	owl:inverseOf sense:hasEndEventType .	

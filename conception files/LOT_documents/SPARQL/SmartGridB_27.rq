@@ -1,0 +1,11 @@
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX sense: <http://w3id.org/explainability/sense#>
+PREFIX : <http://example.org/seehub#>
+select *
+where { 
+    ?pvsensor a sosa:Sensor .
+    ?pvsensor sosa:observes ?property .
+    ?associatedState sense:associatedProperty ?property .
+    ?causality sense:cause ?associatedState ;
+               sense:effect ?affectedState .
+}

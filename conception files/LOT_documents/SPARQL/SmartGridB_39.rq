@@ -1,0 +1,10 @@
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX sense: <http://w3id.org/explainability/sense#>
+PREFIX : <http://example.org/seehub#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+select * where { 
+    VALUES ?state {:Event3}
+    ?state sense:hasStateType ?statetype .
+    ?statetype sense:hasMitigationPlan ?plan .
+    ?plan sense:containsMitigationOption ?option .
+} limit 100 

@@ -3,8 +3,9 @@ PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX : <http://example.org/seehub#>
 select *
 where { 
-    ?p a sosa:Platform .
-    ?p sosa:hosts ?s .
-    ?s s:hasSensorType ?t .
+	?s s:hasStateType ?st .
+	?st a s:StateType .
+	?st s:hasMitigationPlan ?p .
+    ?p s:hasMitigationOption ?o .
     
-} 
+}

@@ -1,0 +1,27 @@
+PREFIX sense:  <http://w3id.org/explainability/sense#>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX : <http://example.org/seehub#>
+
+SELECT distinct ?causesensor ?cause ?cset ?ceet ?relation ?effectsensor ?effect ?set ?eet
+WHERE {{
+?cause sense:causallyRelated ?effect .
+?effect (sense:causallyRelated)* :DemandEnvelopeViolation_State_c0301bc8-7581-4623-8a60-4f04cd7198c3 .
+<<?cause sense:causallyRelated ?effect>> sense:hasCausalSource ?stc .
+?stc sense:causalRelation ?relation .
+?causeobservation sosa:hasResult ?cause .
+?causesensor sosa:madeObservation ?causeobservation .
+?effectobservation sosa:hasResult ?effect .
+?effectsensor sosa:madeObservation ?effectobservation .
+?effect sense:hasStartEvent ?se .
+?effect sense:hasEndEvent ?ee .
+?seo sosa:hasResult ?se .
+?seo sosa:phenomenonTime ?set .
+?eeo sosa:hasResult ?ee .
+?eeo sosa:phenomenonTime ?eet .
+?cause sense:hasStartEvent ?cse .
+?cause sense:hasEndEvent ?cee .
+?cseo sosa:hasResult ?cse .
+?cseo sosa:phenomenonTime ?cset .
+?ceeo sosa:hasResult ?cee .
+?ceeo sosa:phenomenonTime ?ceet .
+}}

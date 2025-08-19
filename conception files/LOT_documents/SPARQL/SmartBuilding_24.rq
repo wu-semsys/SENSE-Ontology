@@ -1,0 +1,9 @@
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX sense: <http://w3id.org/explainability/sense#>
+
+SELECT ?ahu
+VALUES ?room {:RoomR}
+WHERE {
+    ?ahu (sosa:hosts)* ?room .
+    ?ahu sense:hasPlatformType sense:AHU .
+}

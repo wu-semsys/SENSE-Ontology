@@ -6,10 +6,9 @@ select *
 where { 
     VALUES ?p { :AllEVChargers1 }
     ?p sosa:hosts ?sensor .
-    ?sensor s:hasSensorType ?sensortype .
-    #?sensortype rdfs:subClassOf ?sensortypeup .
-    ?stateType s:associatedSensorType ?sensortype .
+    ?sensor sosa:observes ?property .
+    ?stateType s:associatedProperty ?property .
     ?causality s:effect ?stateType .
     ?causality s:cause ?cause .
-    ?cause s:associatedSensorType ?causesensortype .
+    ?cause s:associatedProperty ?causesproperty .
 }

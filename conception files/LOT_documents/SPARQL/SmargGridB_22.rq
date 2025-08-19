@@ -1,0 +1,9 @@
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX sense: <http://w3id.org/explainability/sense#>
+select ?role ?type
+where { 
+    ?u a sense:User .
+    ?u sense:interestedIn ?statetype .
+    ?u sense:hasUserRole ?role .
+    ?u sense:hasUserType ?type .
+}

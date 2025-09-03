@@ -36,8 +36,10 @@ sense: a owl:Ontology ;
     dc:modified "2024-10-16" ;
     dc:title "SENSE Ontology",
         "SENSE Ontology"@en ;
-    vann:preferredNamespacePrefix "sense" ;
+    vann:preferredNamespacePrefix "s" ;
     vann:preferredNamespaceUri "http://w3id.org/explainability/sense#" ;
+    owl:imports sosa:,
+        <https://www.w3.org/ns/ssn/> ;
     owl:versionInfo "3.0" ;
     mod:createdWith <https://chowlk.linkeddata.es/> .
 
@@ -251,8 +253,7 @@ sense:interestedIn a owl:ObjectProperty ;
 sense:isHostedBy a owl:ObjectProperty ;
     rdfs:label "is hosted by" ;
     rdfs:comment "inverse relation of sense:hosts." ;
-    rdfs:domain sense:Platform,
-                sense:Sensor ;
+    rdfs:domain sense:Sensor ;
     rdfs:range sense:Platform ;
     owl:inverseOf sense:hosts .
 
@@ -299,8 +300,7 @@ sense:observedProperty a owl:ObjectProperty ;
 sense:observes a owl:ObjectProperty ;
     rdfs:label "observes" ;
     rdfs:comment "subclass of sosa:observes -  relation from a Sensor to a Property that it is capable of sensing" ;
-    rdfs:domain sense:Sensor ;
-    rdfs:range sense:ObservableProperty .
+    rdfs:domain sense:Sensor .
 
 sense:origin a owl:DatatypeProperty ;
     rdfs:label "origin" ;
@@ -362,7 +362,6 @@ sense:hasStartEventType a owl:ObjectProperty ;
 sense:hosts a owl:ObjectProperty ;
     rdfs:label "hosts" ;
     rdfs:comment "subclass of sosa:hosts -  relation from a Platform to an asset (System or Platform) hosted or mounted on it" ;
-    owl:inverseOf sense:isHostedBy ;
     rdfs:domain sense:Platform ;
     rdfs:range sense:Platform,
         sense:Sensor .
@@ -404,11 +403,6 @@ sense:AccessRight a owl:Class ;
     rdfs:label "Access Right" ;
     rdfs:comment "Access Rights, defining access to platforms of the system." .
 
-sense:Event a owl:Class ;
-    rdfs:label "Event" ;
-    rdfs:comment "something happening in the system, which is of interest. An event is always considered to be happening at a single time point." ;
-    owl:disjointWith sense:State .
-
 sense:ParameterBinding a owl:Class ;
     rdfs:label "Parameter Binding" ;
     rdfs:comment "A parameter binding connects parameters from the EventDetection's definition to a literal or a sensor. Examples of parameters are the variables in a formula." .
@@ -416,6 +410,11 @@ sense:ParameterBinding a owl:Class ;
 sense:User a owl:Class ;
     rdfs:label "User" ;
     rdfs:comment "A system user, who requires explanations." .
+
+sense:Event a owl:Class ;
+    rdfs:label "Event" ;
+    rdfs:comment "something happening in the system, which is of interest. An event is always considered to be happening at a single time point." ;
+    owl:disjointWith sense:State .
 
 sense:EventDetection a owl:Class ;
     rdfs:label "Event Detection" ;

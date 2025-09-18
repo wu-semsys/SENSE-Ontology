@@ -6,6 +6,7 @@
 @prefix sosa: <http://www.w3.org/ns/sosa/> .
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
 
 dc:contributor a owl:AnnotationProperty .
 
@@ -30,7 +31,7 @@ sense: a owl:Ontology ;
         "Thomas Frühwirth" ;
     dc:created "2023-11-01" ;
     dc:creator "Fajar J. Ekaputra",
-        "Katrin Schreiberhuber" ;
+        "Katrin Ehrenmueller" ;
     dc:description "An ontology to create an explainable Cyber Physical System (CPS)"@en ;
     dc:license <https://creativecommons.org/licenses/by/4.0> ;
     dc:modified "2024-10-16" ;
@@ -40,10 +41,6 @@ sense: a owl:Ontology ;
     vann:preferredNamespaceUri "http://w3id.org/explainability/sense#" ;
     owl:versionInfo "3.0" ;
     mod:createdWith <https://chowlk.linkeddata.es/> .
-
-sense:PlatformOfInterest rdfs:comment "A plaform, which can host sensors, but is also a feature of interest." .
-
-sense:ResultType rdfs:comment "A type of Result. This is usually a State Type or an Event Type." .
 
 sense:allowsControlAccessTo a owl:ObjectProperty ;
     rdfs:label "allows control access to" ;
@@ -90,10 +87,12 @@ sense:causalRelation a owl:DatatypeProperty ;
 sense:cause a owl:ObjectProperty ;
     rdfs:label "cause" ;
     rdfs:comment "Relation between a state type causality and the state type that is the cause of the relation." ;
-    rdfs:domain sense:StateCausality,
-        sense:StateTypeCausality ;
-    rdfs:range sense:State,
-        sense:StateType .
+    rdfs:domain sense:StateCausality
+       # ,sense:StateTypeCausality
+        ;
+    rdfs:range sense:State
+    #, sense:StateType 
+    .
 
 sense:considersAccessRights a owl:ObjectProperty ;
     rdfs:label "considers access rights" ;
@@ -143,7 +142,8 @@ sense:detectedEvent a owl:ObjectProperty ;
     rdfs:label "detected event" ;
     rdfs:comment "subproperty of sosa:hasResult - relation from an Observation to its result" ;
     rdfs:domain sense:Observation ;
-    rdfs:range sense:Event .
+    rdfs:range sense:Event ;
+    rdfs:subPropertyOf sosa:hasResult .
 
 sense:detectsEventType a owl:ObjectProperty ;
     rdfs:label "detects event type" ;
@@ -154,17 +154,19 @@ sense:detectsEventType a owl:ObjectProperty ;
 sense:effect a owl:ObjectProperty ;
     rdfs:label "effect" ;
     rdfs:comment "Relation between a state type causality and the state type that is the effect of the relation." ;
-    rdfs:domain sense:StateCausality,
-        sense:StateTypeCausality ;
-    rdfs:range sense:State,
-        sense:StateType .
+    rdfs:domain sense:StateCausality
+    # , sense:StateTypeCausality 
+    ;
+    rdfs:range sense:State
+    #, sense:StateType 
+    .
 
-sense:endsStateType a owl:ObjectProperty ;
-    rdfs:label "ends state type" ;
-    rdfs:comment "inverse of hasEndEventType, relation from an Event to the state ended by the event." ;
-    rdfs:domain sense:EventType ;
-    rdfs:range sense:StateType ;
-    owl:inverseOf sense:hasEndEventType .
+#sense:endsStateType a owl:ObjectProperty ;
+#    rdfs:label "ends state type" ;
+#    rdfs:comment "inverse of hasEndEventType, relation from an Event to the state ended by the event." ;
+#    rdfs:domain sense:EventType ;
+#    rdfs:range sense:StateType ;
+#    owl:inverseOf sense:hasEndEventType .
 
 sense:eventTime a owl:DatatypeProperty ;
     rdfs:label "event time" ;
@@ -192,9 +194,10 @@ sense:hasEndEvent a owl:ObjectProperty ;
 
 sense:hasFeatureOfInterest a owl:ObjectProperty ;
     rdfs:label "has feature of interest" ;
-    rdfs:comment "subclass of sosa:hasFeatureOfInterest -  relation from an Execution to its subject entity" ;
+    rdfs:comment "subproperty of sosa:hasFeatureOfInterest -  relation from an Execution to its subject entity" ;
     rdfs:domain sense:Observation ;
-    rdfs:range sense:Platform .
+    rdfs:range sense:Platform ;
+    rdfs:subPropertyOf sosa:hasFeatureOfInterest .
 
 sense:hasMitigationPlan a owl:ObjectProperty ;
     rdfs:label "has mitigation plan" ;
@@ -216,19 +219,18 @@ sense:hasProperty a owl:ObjectProperty ;
     rdfs:domain sense:PlatformType ;
     rdfs:range sense:ObservableProperty .
 
-sense:hasResultType rdfs:comment "each Result has a result type." .
-
 sense:hasStartEvent a owl:ObjectProperty ;
     rdfs:label "has start event" ;
     rdfs:comment "relation between a state and the event that is starting the state." ;
     rdfs:domain sense:State ;
     rdfs:range sense:Event .
 
-sense:hasUnit a owl:DatatypeProperty ;
+sense:hasUnit a owl:ObjectProperty ;
     rdfs:label "has unit" ;
-    rdfs:comment "subclass of qudt:Unit - This property relates a system of units with a unit of measure that is either:" ;
+    rdfs:comment "subproperty of qudt:hasUnit - A reference to the unit of measure of a quantity (variable or constant) of interest." ;
     rdfs:domain sense:Sensor ;
-    rdfs:range xsd:string .
+    rdfs:range qudt:Unit ;
+    rdfs:subPropertyOf qudt:hasUnit .
 
 sense:hasUserRole a owl:ObjectProperty ;
     rdfs:label "has user role" ;
@@ -258,13 +260,28 @@ sense:isHostedBy a owl:ObjectProperty ;
 
 sense:isOfType a owl:ObjectProperty ;
     rdfs:label "is of type" ;
-    rdfs:comment "relation from an instance of a class to its class type via explicit typing." ;
-    rdfs:domain sense:Event,
-        sense:Platform,
-        sense:State ;
-    rdfs:range sense:EventType,
-        sense:PlatformType,
-        sense:StateType .
+    rdfs:comment "relation from an instance of a class to its class type via explicit typing." .
+
+sense:isOfEventType a owl:ObjectProperty ;
+    rdfs:label "is of event type" ;
+    rdfs:comment "Links an Event to its corresponding EventType." ;
+    rdfs:subPropertyOf sense:isOfType ;
+    rdfs:domain sense:Event ;
+    rdfs:range  sense:EventType .
+
+sense:isOfStateType a owl:ObjectProperty ;
+    rdfs:label "is of state type" ;
+    rdfs:comment "Links a State to its state type." ;
+    rdfs:subPropertyOf sense:isOfType ;
+    rdfs:domain sense:State ;
+    rdfs:range  sense:StateType .
+
+sense:isOfPlatformType a owl:ObjectProperty ;
+    rdfs:label "is of platform type" ;
+    rdfs:comment "Links a Platform to its platform type." ;
+    rdfs:subPropertyOf sense:isOfType ;
+    rdfs:domain sense:Platform ;
+    rdfs:range  sense:PlatformType .
 
 sense:isTriggerStateType a owl:DatatypeProperty ;
     rdfs:label "is trigger state type" ;
@@ -280,9 +297,10 @@ sense:linkedToSensor a owl:ObjectProperty ;
 
 sense:madeObservation a owl:ObjectProperty ;
     rdfs:label "made observation" ;
-    rdfs:comment "subclass of sosa:madeObservation -  relation from a Sensor to an Observation or ObservationCollection it has made." ;
+    rdfs:comment "subproperty of sosa:madeObservation -  relation from a Sensor to an Observation or ObservationCollection it has made." ;
     rdfs:domain sense:Sensor ;
-    rdfs:range sense:Observation .
+    rdfs:range sense:Observation ;
+    rdfs:subPropertyOf sosa:madeObservation .
 
 sense:method a owl:DatatypeProperty ;
     rdfs:label "method" ;
@@ -292,15 +310,17 @@ sense:method a owl:DatatypeProperty ;
 
 sense:observedProperty a owl:ObjectProperty ;
     rdfs:label "observed property" ;
-    rdfs:comment "subclass of sosa:observedProperty - relation from an Observation or ObservationCollection to the property that was observed" ;
+    rdfs:comment "subproperty of sosa:observedProperty - relation from an Observation or ObservationCollection to the property that was observed" ;
     rdfs:domain sense:Observation ;
-    rdfs:range sense:ObservableProperty .
+    rdfs:range sense:ObservableProperty ;
+    rdfs:subPropertyOf sosa:observedProperty .
 
 sense:observes a owl:ObjectProperty ;
     rdfs:label "observes" ;
-    rdfs:comment "subclass of sosa:observes -  relation from a Sensor to a Property that it is capable of sensing" ;
+    rdfs:comment "subproperty of sosa:observes -  relation from a Sensor to a Property that it is capable of sensing" ;
     rdfs:domain sense:Sensor ;
-    rdfs:range sense:ObservableProperty .
+    rdfs:range sense:ObservableProperty ;
+    rdfs:subPropertyOf sosa:observes .
 
 sense:origin a owl:DatatypeProperty ;
     rdfs:label "origin" ;
@@ -314,12 +334,12 @@ sense:parameterName a owl:DatatypeProperty ;
     rdfs:domain sense:ParameterBinding ;
     rdfs:range xsd:string .
 
-sense:startsStateType a owl:ObjectProperty ;
-    rdfs:label "starts state type" ;
-    rdfs:comment "inverse of hasStartEventType, relation from an Event to the state started by the event." ;
-    rdfs:domain sense:EventType ;
-    rdfs:range sense:StateType ;
-    owl:inverseOf sense:hasStartEventType .
+#sense:startsStateType a owl:ObjectProperty ;
+#    rdfs:label "starts state type" ;
+#    rdfs:comment "inverse of hasStartEventType, relation from an Event to the state started by the event." ;
+#    rdfs:domain sense:EventType ;
+#    rdfs:range sense:StateType ;
+#    owl:inverseOf sense:hasStartEventType .
 
 sense:suggests a owl:ObjectProperty ;
     rdfs:label "suggests" ;
@@ -341,31 +361,33 @@ sense:topologicalRelation a owl:DatatypeProperty ;
 
 sense:usedProcedure a owl:ObjectProperty ;
     rdfs:label "used procedure" ;
-    rdfs:comment "subclass of sosa:usedProcedure - relation from an Execution to a Procedure used to make it" ;
+    rdfs:comment "subproperty of sosa:usedProcedure - relation from an Execution to a Procedure used to make it" ;
     rdfs:domain sense:Observation ;
-    rdfs:range sense:EventDetection .
+    rdfs:range sense:EventDetection ;
+    rdfs:subPropertyOf sosa:usedProcedure .
 
 owl:versionInfo a owl:AnnotationProperty .
 
-sense:hasEndEventType a owl:ObjectProperty ;
-    rdfs:label "has end event type" ;
-    rdfs:comment "Relation between a state type and an event type. Describes which event type ends a certain state type." ;
-    rdfs:domain sense:StateType ;
-    rdfs:range sense:EventType .
+#sense:hasEndEventType a owl:ObjectProperty ;
+#    rdfs:label "has end event type" ;
+#    rdfs:comment "Relation between a state type and an event type. Describes which event type ends a certain state type." ;
+#    rdfs:domain sense:StateType ;
+#    rdfs:range sense:EventType .
 
-sense:hasStartEventType a owl:ObjectProperty ;
-    rdfs:label "has start event type" ;
-    rdfs:comment "Relation between a state type and an event type. Describes which event type starts a certain state type." ;
-    rdfs:domain sense:StateType ;
-    rdfs:range sense:EventType .
+#sense:hasStartEventType a owl:ObjectProperty ;
+#    rdfs:label "has start event type" ;
+#    rdfs:comment "Relation between a state type and an event type. Describes which event type starts a certain state type." ;
+#    rdfs:domain sense:StateType ;
+#    rdfs:range sense:EventType .
 
 sense:hosts a owl:ObjectProperty ;
     rdfs:label "hosts" ;
-    rdfs:comment "subclass of sosa:hosts -  relation from a Platform to an asset (System or Platform) hosted or mounted on it" ;
+    rdfs:comment "subproperty of sosa:hosts -  relation from a Platform to an asset (System or Platform) hosted or mounted on it" ;
     owl:inverseOf sense:isHostedBy ;
     rdfs:domain sense:Platform ;
     rdfs:range sense:Platform,
-        sense:Sensor .
+        sense:Sensor ;
+    rdfs:subPropertyOf sosa:hosts .
 
 sense:MitigationOption a owl:Class ;
     rdfs:label "Mitigation Option" ;
@@ -390,7 +412,8 @@ sense:VirtualSensor a owl:Class ;
 
 sense:ObservableProperty a owl:Class ;
     rdfs:label "Observable Property" ;
-    rdfs:comment "subclass of sosa:ObservableProperty - identifiable quality of a FeatureOfInterest that can be observed " .
+    rdfs:comment "subclass of sosa:ObservableProperty - identifiable quality of a FeatureOfInterest that can be observed " ;
+    rdfs:subclassOf sosa:ObservableProperty .
 
 sense:PlatformType a owl:Class ;
     rdfs:label "Platform Type" ;
@@ -407,6 +430,7 @@ sense:AccessRight a owl:Class ;
 sense:Event a owl:Class ;
     rdfs:label "Event" ;
     rdfs:comment "something happening in the system, which is of interest. An event is always considered to be happening at a single time point." ;
+    rdfs:subclassOf sosa:Result ;
     owl:disjointWith sense:State .
 
 sense:ParameterBinding a owl:Class ;
@@ -427,7 +451,8 @@ sense:Explanation a owl:Class ;
 
 sense:Observation a owl:Class ;
     rdfs:label "Observation" ;
-    rdfs:comment "subclass of sosa:Observation - act of carrying out an ObservingProcedure using a Sensor to estimate or calculate a value of an observable Property of a FeatureOfInterest" .
+    rdfs:comment "subclass of sosa:Observation - act of carrying out an ObservingProcedure using a Sensor to estimate or calculate a value of an observable Property of a FeatureOfInterest" ;
+    rdfs:subclassOf sosa:Observation .
 
 sense:StateTypeCausality a owl:Class ;
     rdfs:label "State Type Causality" ;
@@ -435,7 +460,8 @@ sense:StateTypeCausality a owl:Class ;
 
 sense:Platform a owl:Class ;
     rdfs:label "Platform" ;
-    rdfs:comment "subclass of sosa:Plaform - entity that hosts other entities, particularly Systems, and other Platforms." .
+    rdfs:comment "subclass of sosa:Plaform - entity that hosts other entities, particularly Systems, and other Platforms." ;
+    rdfs:subclassOf sosa:Platform .
 
 sense:State a owl:Class ;
     rdfs:label "State" ;
@@ -448,9 +474,95 @@ sense:EventType a owl:Class ;
 
 sense:Sensor a owl:Class ;
     rdfs:label "Sensor" ;
-    rdfs:comment "subclass of sosa:Sensor - System that implements an ObservingProcedure to determine the value of an observable Property" .
+    rdfs:comment "subclass of sosa:Sensor - System that implements an ObservingProcedure to determine the value of an observable Property" ;
+    rdfs:subclassOf sosa:Sensor .
 
 sense:StateType a owl:Class ;
     rdfs:label "State Type" ;
     rdfs:comment "A type of a state. Each state has a state type." .
 
+
+# SOSA properties
+sosa:hosts a owl:ObjectProperty ;
+    rdfs:label "hosts"@en ;
+    rdfs:comment "Relates a platform to the platforms, and sensors it hosts."@en ;
+    rdfs:domain sosa:Platform ;
+    rdfs:range sosa:Platform, sosa:Sensor .
+
+sosa:observedProperty a owl:ObjectProperty ;
+    rdfs:label "observed property"@en ;
+    rdfs:comment "The property being observed by a sensor."@en ;
+    rdfs:domain sosa:Observation ;
+    rdfs:range sosa:ObservedProperty .
+
+sosa:observes a owl:ObjectProperty ;
+    rdfs:label "observes"@en ;
+    rdfs:comment "Relates a sensor to the property it observes."@en ;
+    rdfs:domain sosa:Sensor ;
+    rdfs:range sosa:ObservableProperty .
+
+sosa:hasResult a owl:ObjectProperty ;
+    rdfs:label "has result"@en ;
+    rdfs:comment "Relates an observation to its result."@en ;
+    rdfs:domain sosa:Observation ;
+    rdfs:range sosa:Result .
+
+sosa:madeObservation a owl:ObjectProperty ;
+    rdfs:label "made observation"@en ;
+    rdfs:comment "Relates a sensor to an observation it made."@en ;
+    rdfs:domain sosa:Sensor ;
+    rdfs:range sosa:Observation .
+
+sosa:usedProcedure a owl:ObjectProperty ;
+    rdfs:label "used procedure"@en ;
+    rdfs:comment "Links an observation to the procedure used."@en ;
+    rdfs:domain sosa:Observation ;
+    rdfs:range sosa:Procedure .
+
+sosa:hasFeatureOfInterest a owl:ObjectProperty ;
+    rdfs:label "has feature of interest"@en ;
+    rdfs:comment "Links an observation to the feature of interest."@en ;
+    rdfs:domain sosa:Observation ;
+    rdfs:range sosa:FeatureOfInterest .
+
+# QUDT properties and class
+qudt:hasUnit a owl:ObjectProperty ;
+    rdfs:label "unit"@en ;
+    rdfs:comment "The unit associated with a quantity value."@en ;
+    rdfs:range qudt:Unit .
+
+# SOSA classes
+qudt:Unit a owl:Class ;
+    rdfs:label "Unit"@en ;
+    rdfs:comment "A unit of measurement, e.g., meter, second, kilogram."@en .
+sosa:ObservedProperty a owl:Class ;
+    rdfs:label "Observed Property"@en ;
+    rdfs:comment "A property that can be observed by a sensor."@en .
+
+sosa:Observation a owl:Class ;
+    rdfs:label "Observation"@en ;
+    rdfs:comment "An act of observing a property of a feature of interest."@en .
+
+sosa:Sensor a owl:Class ;
+    rdfs:label "Sensor"@en ;
+    rdfs:comment "A device or agent that performs observations."@en .
+
+sosa:Platform a owl:Class ;
+    rdfs:label "Platform"@en ;
+    rdfs:comment "A physical or virtual entity that hosts sensors."@en .
+
+sosa:Result a owl:Class ;
+    rdfs:label "Result"@en ;
+    rdfs:comment "The outcome of an observation."@en .
+
+sosa:FeatureOfInterest a owl:Class ;
+    rdfs:label "Feature of Interest"@en ;
+    rdfs:comment "The real-world feature that is being observed."@en .
+
+sosa:ObservableProperty a owl:Class ;
+    rdfs:label "Observable Property"@en ;
+    rdfs:comment "A property that can be observed using a sensor."@en .
+
+sosa:Procedure a owl:Class ;
+    rdfs:label "Procedure"@en ;
+    rdfs:comment "The method or protocol used to make an observation."@en .
